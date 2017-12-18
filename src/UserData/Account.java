@@ -17,7 +17,7 @@ public class Account {
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.city = city;
-        this.profiles = new ArrayList();
+        this.profiles = new ArrayList<Profile>();
     }
 
     public Account(int subscriberNumber, String name, String streetName, String houseNumber, String city, List profiles) {

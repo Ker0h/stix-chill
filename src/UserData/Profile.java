@@ -14,7 +14,7 @@ public class Profile {
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
         this.account = account;
-        this.watched = new ArrayList();
+        this.watched = new ArrayList<Watched>();
     }
 
     public Profile(String profileName, Date dateOfBirth, Account account, List watched) {
