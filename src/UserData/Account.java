@@ -8,23 +8,26 @@ public class Account {
     private String name;
     private String streetName;
     private String houseNumber;
+    private String postalCode;
     private String city;
     private List profiles;
 
-    public Account(int subscriberNumber, String name, String streetName, String houseNumber, String city) {
+    public Account(int subscriberNumber, String name, String streetName, String houseNumber, String postalCode, String city) {
         this.subscriberNumber = subscriberNumber;
         this.name = name;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
         this.city = city;
         this.profiles = new ArrayList<Profile>();
     }
 
-    public Account(int subscriberNumber, String name, String streetName, String houseNumber, String city, List profiles) {
+    public Account(int subscriberNumber, String name, String streetName, String houseNumber, String postalCode, String city, List profiles) {
         this.subscriberNumber = subscriberNumber;
         this.name = name;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
         this.city = city;
         this.profiles = profiles;
     }
@@ -59,6 +62,14 @@ public class Account {
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getCity() {
