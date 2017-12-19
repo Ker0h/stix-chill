@@ -1,23 +1,22 @@
 package UserData;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Profile {
     private String profileName;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private Account account;
     private List watched;
 
-    public Profile(String profileName, Date dateOfBirth, Account account) {
+    public Profile(String profileName, String dateOfBirth, Account account) {
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
         this.account = account;
         this.watched = new ArrayList<Watched>();
     }
 
-    public Profile(String profileName, Date dateOfBirth, Account account, List watched) {
+    public Profile(String profileName, String dateOfBirth, Account account, List watched) {
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
         this.account = account;
@@ -32,11 +31,11 @@ public class Profile {
         this.profileName = profileName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
