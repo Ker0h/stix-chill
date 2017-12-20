@@ -25,7 +25,11 @@ public class DBConnector {
     }
 
     @Override
-    protected void finalize() {
-        if (con != null) try { con.close(); } catch(Exception e) {e.printStackTrace();}
+    protected void finalize() throws Throwable {
+        try {
+            con.close();
+        } finally {
+            super.finalize();
+        }
     }
 }
