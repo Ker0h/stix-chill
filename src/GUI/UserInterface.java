@@ -24,7 +24,19 @@ public class UserInterface implements Runnable {
 
     private void createComponents(Container container) {
         container.setLayout(new BorderLayout());
+        container.add(createMenuPanel(), BorderLayout.WEST);
+    }
 
+    private JPanel createMenuPanel(){
+        JPanel panel = new JPanel();
+        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+        panel.setLayout(layout);
 
+        panel.add(new JButton("Overzicht 1"));
+        panel.add(new JButton("Overzicht 2"));
+        panel.add(new JButton("Overzicht 3"));
+        panel.add(new JButton("Overzicht 4"));
+
+        return panel;
     }
 }
