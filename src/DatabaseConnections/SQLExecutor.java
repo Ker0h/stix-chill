@@ -3,12 +3,11 @@ package DatabaseConnections;
 import java.sql.*;
 
 public class SQLExecutor {
+    private ResultSet resultSet = null;
 
-    public static void getAccounts(){
-        ResultSet resultSet = null;
-
+    public void getAccounts(){
+        DBConnector dbConnector = new DBConnector();
         try {
-            DBConnector dbConnector = new DBConnector();
             String SQL = "SELECT * FROM Account";
             resultSet = dbConnector.runSQL(SQL);
 
