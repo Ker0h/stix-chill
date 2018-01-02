@@ -5,15 +5,18 @@ import UserData.Profile;
 import UserData.Watched;
 import Watchables.Episode;
 import Watchables.Film;
+import Watchables.Programme;
 import Watchables.Series;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SQLExecutor {
     private ResultSet resultSet = null;
 
-    public void getAccounts(){
+    public List<Account> getAccounts(){
+        List<Account> accounts = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "SELECT * FROM Account";
@@ -28,6 +31,7 @@ public class SQLExecutor {
                 String city = resultSet.getString("City");
 
                 Account acc = new Account(subNo,name,streetName,houseNumber,postalCode,city);
+                accounts.add(acc);
                 System.out.println(acc.toString());
             }
         } catch (Exception e) {
@@ -35,9 +39,11 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+        return accounts;
     }
 
-    public void getProfiles(Account account){
+    public List<Profile> getProfiles(Account account){
+        List<Profile> profiles = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "SELECT * FROM Profile WHERE SubscriberNumber = " + account.getSubscriberNumber();
@@ -48,8 +54,8 @@ public class SQLExecutor {
                 String dateOfBirth = resultSet.getString("DateOfBirth");
 
                 Profile prof = new Profile(profileName, dateOfBirth, account);
-                System.out.println(prof.toString());
                 account.addProfile(prof);
+                profiles.add(prof);
             }
             System.out.println(account.toString());
 
@@ -58,9 +64,11 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+        return profiles;
     }
 
-    public void getSeries(){
+    public List<Series> getSeries(){
+        List<Series> series = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "SELECT * FROM Series";
@@ -74,16 +82,18 @@ public class SQLExecutor {
                 String isLike = resultSet.getString("IsLike");
 
                 Series ser = new Series(seriesTitle,language,genre,pg,isLike);
-                System.out.println(ser.toString());
+                series.add(ser);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+        return series;
     }
 
-    public void getEpisodes(Series ser){
+    public List<Episode> getEpisodes(Series ser){
+        List<Episode> episodes = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "SELECT * FROM Episode e join Programe p on p.ProgrameID = e.ProgrameID WHERE SerieTitle = '" + ser.getSeriesTitle() + "'";
@@ -96,7 +106,7 @@ public class SQLExecutor {
                 String title = resultSet.getString("Title");
                 Episode ep = new Episode(programmeID, title, duration, season, ser);
                 ser.addEpisode(ep);
-                System.out.println(ep);
+                episodes.add(ep);
             }
             System.out.println(ser);
 
@@ -105,9 +115,11 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+        return episodes;
     }
 
-    public void getFilms(){
+    public List<Film> getFilms(){
+        List<Film> films = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "SELECT * FROM Film f join Programe p on p.ProgrameID = f.ProgrameID";
@@ -122,16 +134,18 @@ public class SQLExecutor {
                 int pg = resultSet.getInt("PG");
 
                 Film film = new Film(programmeID, title, duration, genre, language, pg);
-                System.out.println(film.toString());
+                films.add(film);
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+        return films;
     }
 
-    public void getWatched(Profile prof){
+    public List<Watched> getWatched(Profile prof){
+        List<Watched> watched = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "SELECT * FROM watched WHERE ProfileName = '" + prof.getProfileName() + "'";
@@ -144,7 +158,7 @@ public class SQLExecutor {
 
                 Watched watch = new Watched(percentage, profileName, programmeID);
                 prof.addWatched(watch);
-                System.out.println(watch.toString());
+                watched.add(watch);
             }
             System.out.println(prof.toString());
         } catch (Exception e) {
@@ -152,5 +166,58 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+        return watched;
+    }
+
+    public List<Watched> getWatched(Film film){
+        List<Watched> watched = new ArrayList<>();
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "SELECT * FROM watched WHERE ProgrameID = '" + film.getProgrammeID() + "'";
+            resultSet = dbConnector.runSQL(SQL);
+
+            while (resultSet.next()) {
+                int percentage = resultSet.getInt("Percentage");
+                String profileName = resultSet.getString("ProfileName");
+                int programmeID = resultSet.getInt("ProgrameID");
+
+                Watched watch = new Watched(percentage, profileName, programmeID);
+                film.addWatched(watch);
+                watched.add(watch);
+            }
+            System.out.println(film.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+        return watched;
+    }
+
+    public List<Watched> getWatched(Episode episode){
+        List<Watched> watched = new ArrayList<>();
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "SELECT * FROM watched WHERE ProgrameID = '" + episode.getProgrammeID() + "'";
+            resultSet = dbConnector.runSQL(SQL);
+
+            while (resultSet.next()) {
+                int percentage = resultSet.getInt("Percentage");
+                String profileName = resultSet.getString("ProfileName");
+                int programmeID = resultSet.getInt("ProgrameID");
+
+                Watched watch = new Watched(percentage, profileName, programmeID);
+                episode.addWatched(watch);
+                watched.add(watch);
+            }
+            System.out.println(episode.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+        return watched;
     }
 }

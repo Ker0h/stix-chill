@@ -46,6 +46,8 @@ public class Film extends Programme {
                 ", pg=" + pg +
                 ", title=" + super.getTitle() +
                 ", duration=" + super.getDuration() +
+                ", watched=" + super.getWatched() +
+
                 '}';
     }
 }

@@ -2,6 +2,8 @@ package DatabaseConnections;
 
 import UserData.Account;
 import UserData.Profile;
+import Watchables.Episode;
+import Watchables.Film;
 import Watchables.Series;
 
 import java.util.Iterator;
@@ -11,6 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         SQLExecutor sqlExecutor = new SQLExecutor();
+
         sqlExecutor.getAccounts();
         System.out.println("--------------------------------------------------------------------");
         sqlExecutor.getSeries();
@@ -24,5 +27,14 @@ public class Main {
         sqlExecutor.getFilms();
         System.out.println("--------------------------------------------------------------------");
         sqlExecutor.getWatched((Profile) acc.getProfiles().get(1));
+        System.out.println("--------------------------------------------------------------------");
+        Film film = new Film(1001, "test", "00:01", "test", "NL", 69);
+        sqlExecutor.getWatched(film);
+        System.out.println("--------------------------------------------------------------------");
+        Episode episode = new Episode(2003, "Cancer Man", "01:00", "S01E04", ser);
+        sqlExecutor.getWatched(episode);
+
+
+
     }
 }

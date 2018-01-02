@@ -31,6 +31,7 @@ public class Episode extends Programme {
         return "Episode{" +
                 "season='" + season + '\'' +
                 ", title=" + super.getTitle() +
+                ", title=" + super.getWatched() +
                 '}';
     }
 }
