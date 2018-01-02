@@ -25,6 +25,7 @@ public class UserInterface implements Runnable {
         container.add(createFooterPanel(), BorderLayout.SOUTH);
     }
 
+
     private JPanel createMenuPanel(){
         JPanel panel = new JPanel();
         BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
