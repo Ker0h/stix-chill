@@ -8,10 +8,10 @@ public class Series {
     private String language;
     private String genre;
     private int pg;
-    private Series isLike;
+    private String isLike;
     private List episodes;
 
-    public Series(String seriesTitle, String language, String genre, int pg, Series isLike) {
+    public Series(String seriesTitle, String language, String genre, int pg, String isLike) {
         this.seriesTitle = seriesTitle;
         this.language = language;
         this.genre = genre;
@@ -20,7 +20,7 @@ public class Series {
         this.episodes = new ArrayList<Episode>();
     }
 
-    public Series(String seriesTitle, String language, String genre, int pg, Series isLike, List episodes) {
+    public Series(String seriesTitle, String language, String genre, int pg, String isLike, List episodes) {
         this.seriesTitle = seriesTitle;
         this.language = language;
         this.genre = genre;
@@ -79,11 +79,11 @@ public class Series {
         this.pg = pg;
     }
 
-    public Series getIsLike() {
+    public String getIsLike() {
         return isLike;
     }
 
-    public void setIsLike(Series isLike) {
+    public void setIsLike(String isLike) {
         this.isLike = isLike;
     }
 
@@ -97,5 +97,17 @@ public class Series {
 
     public void addEpisode(Episode episode){
         this.episodes.add(episode);
+    }
+
+    @Override
+    public String toString() {
+        return "Series{" +
+                "seriesTitle='" + seriesTitle + '\'' +
+                ", language='" + language + '\'' +
+                ", genre='" + genre + '\'' +
+                ", pg=" + pg +
+                ", isLike='" + isLike + '\'' +
+                ", episodes=" + episodes +
+                '}';
     }
 }
