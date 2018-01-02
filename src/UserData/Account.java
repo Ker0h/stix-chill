@@ -92,6 +92,16 @@ public class Account {
         this.profiles.add(profile);
     }
 
+//    public static List<Account> getSingleProfileAccounts(){
+//        List<Account> singleProfileAccounts = new ArrayList<Account>();
+//        for(Account a: allAccounts){
+//            if(a.getProfiles().size() == 1){
+//                singleProfileAccounts.add(a);
+//            }
+//        }
+//        return singleProfileAccounts;
+//    }
+
     @Override
     public String toString() {
         return "Account{" +

@@ -1,5 +1,8 @@
 package GUI;
 
+import Watchables.*;
+import UserData.*;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -21,22 +24,30 @@ public class UserInterface implements Runnable {
 
     private void createComponents(Container container) {
         container.setLayout(new BorderLayout());
-        container.add(createMenuPanel(), BorderLayout.WEST);
+        container.add(createMenuPanel(), BorderLayout.CENTER);
         container.add(createFooterPanel(), BorderLayout.SOUTH);
     }
 
 
-    private JPanel createMenuPanel(){
-        JPanel panel = new JPanel();
-        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-        panel.setLayout(layout);
+    private JTabbedPane createMenuPanel(){
+        JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.LEFT);
+        BorderLayout layout = new BorderLayout();
 
-        panel.add(new JButton("Overzicht 1"));
-        panel.add(new JButton("Overzicht 2"));
-        panel.add(new JButton("Overzicht 3"));
-        panel.add(new JButton("Overzicht 4"));
+        JPanel averageSeries = new JPanel(layout);
+        JComboBox<Series> selectSeries = new JComboBox();
+        averageSeries.add(selectSeries, BorderLayout.NORTH);
 
-        return panel;
+        JPanel singleProfile = new JPanel(layout);
+        JTextArea profileArea = new JTextArea();
+        JScrollPane profileScroll = new JScrollPane(profileArea);
+
+        //Account.getSingleProfileAccounts();
+        singleProfile.add(profileScroll);
+
+        tabbedPane.add("Average watchtime by series", averageSeries);
+        tabbedPane.add("Accounts with a single profile", singleProfile);
+
+        return tabbedPane;
     }
 
     private JPanel createFooterPanel(){
@@ -53,4 +64,6 @@ public class UserInterface implements Runnable {
 
         return panel;
     }
+
+
 }
