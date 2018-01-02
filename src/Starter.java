@@ -41,14 +41,14 @@ public class Starter {
         episodes.add(baskervilleHounds);
         episodes.add(blackBride);
 
-        Watched jop1Baskerille = new Watched(100, jop1, baskervilleHounds);
-        Watched jop1BlackBride = new Watched(50, jop1, blackBride);
-        Watched ywillemsBaskerville = new Watched(50, ywillems, baskervilleHounds);
+        //Watched jop1Baskerille = new Watched(100, jop1, baskervilleHounds);
+       // Watched jop1BlackBride = new Watched(50, jop1, blackBride);
+       // Watched ywillemsBaskerville = new Watched(50, ywillems, baskervilleHounds);
         List allWatched = new ArrayList<Watched>();
 
-        allWatched.add(jop1Baskerille);
-        allWatched.add(jop1BlackBride);
-        allWatched.add(ywillemsBaskerville);
+        //allWatched.add(jop1Baskerille);
+       // allWatched.add(jop1BlackBride);
+       // allWatched.add(ywillemsBaskerville);
 
         SwingUtilities.invokeLater(new UserInterface());
     }

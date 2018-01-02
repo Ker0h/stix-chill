@@ -2,6 +2,7 @@ package DatabaseConnections;
 
 import UserData.Account;
 import UserData.Profile;
+import UserData.Watched;
 import Watchables.Episode;
 import Watchables.Film;
 import Watchables.Series;
@@ -123,8 +124,29 @@ public class SQLExecutor {
                 Film film = new Film(programmeID, title, duration, genre, language, pg);
                 System.out.println(film.toString());
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
 
+    public void getWatched(Profile prof){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "SELECT * FROM watched WHERE ProfileName = '" + prof.getProfileName() + "'";
+            resultSet = dbConnector.runSQL(SQL);
 
+            while (resultSet.next()) {
+                int percentage = resultSet.getInt("Percentage");
+                String profileName = resultSet.getString("ProfileName");
+                int programmeID = resultSet.getInt("ProgrameID");
+
+                Watched watch = new Watched(percentage, profileName, programmeID);
+                prof.addWatched(watch);
+                System.out.println(watch.toString());
+            }
+            System.out.println(prof.toString());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
