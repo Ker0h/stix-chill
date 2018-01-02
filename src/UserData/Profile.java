@@ -58,4 +58,14 @@ public class Profile {
     public void addWatched(Watched watched){
         this.watched.add(watched);
     }
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "profileName='" + profileName + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", account=" + account.getSubscriberNumber() +
+                ", watched=" + watched +
+                '}';
+    }
 }

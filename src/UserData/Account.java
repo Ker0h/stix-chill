@@ -91,4 +91,17 @@ public class Account {
     public void addProfile(Profile profile){
         this.profiles.add(profile);
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "subscriberNumber=" + subscriberNumber +
+                ", name='" + name + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", houseNumber='" + houseNumber + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", profiles=" + profiles +
+                '}';
+    }
 }
