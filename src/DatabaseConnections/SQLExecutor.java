@@ -2,6 +2,8 @@ package DatabaseConnections;
 
 import UserData.Account;
 import UserData.Profile;
+import Watchables.Episode;
+import Watchables.Film;
 import Watchables.Series;
 
 import java.sql.*;
@@ -73,6 +75,56 @@ public class SQLExecutor {
                 Series ser = new Series(seriesTitle,language,genre,pg,isLike);
                 System.out.println(ser.toString());
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
+    public void getEpisodes(Series ser){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "SELECT * FROM Episode e join Programe p on p.ProgrameID = e.ProgrameID WHERE SerieTitle = '" + ser.getSeriesTitle() + "'";
+            resultSet = dbConnector.runSQL(SQL);
+
+            while (resultSet.next()) {
+                int programmeID = resultSet.getInt("ProgrameID");
+                String duration = resultSet.getString("Duration");
+                String season = resultSet.getString("Season");
+                String title = resultSet.getString("Title");
+                Episode ep = new Episode(programmeID, title, duration, season, ser);
+                ser.addEpisode(ep);
+                System.out.println(ep);
+            }
+            System.out.println(ser);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
+    public void getFilms(){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "SELECT * FROM Film f join Programe p on p.ProgrameID = f.ProgrameID";
+            resultSet = dbConnector.runSQL(SQL);
+
+            while (resultSet.next()) {
+                int programmeID = resultSet.getInt("ProgrameID");
+                String title = resultSet.getString("Title");
+                String duration = resultSet.getString("Duration");
+                String genre = resultSet.getString("Genre");
+                String language = resultSet.getString("Language");
+                int pg = resultSet.getInt("PG");
+
+                Film film = new Film(programmeID, title, duration, genre, language, pg);
+                System.out.println(film.toString());
+            }
+
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

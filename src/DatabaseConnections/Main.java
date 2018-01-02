@@ -1,6 +1,7 @@
 package DatabaseConnections;
 
 import UserData.Account;
+import Watchables.Series;
 
 public class Main {
 
@@ -12,5 +13,10 @@ public class Main {
         System.out.println("--------------------------------------------------------------------");
         Account acc = new Account(1215426, "Fam. van Raalte", "Schopenhauerdijkje", "5","3991 ML" , "Houten");
         sqlExecutor.getProfiles(acc);
+        System.out.println("--------------------------------------------------------------------");
+        Series ser = new Series("Sherlock", "Engels-Amerikaans", "Detective",12 ,"Fargo" );
+        sqlExecutor.getEpisodes(ser);
+        System.out.println("--------------------------------------------------------------------");
+        sqlExecutor.getFilms();
     }
 }

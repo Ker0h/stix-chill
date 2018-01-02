@@ -25,4 +25,12 @@ public class Episode extends Programme {
     public void setSeries(Series series) {
         this.series = series;
     }
+
+    @Override
+    public String toString() {
+        return "Episode{" +
+                "season='" + season + '\'' +
+                ", title=" + super.getTitle() +
+                '}';
+    }
 }

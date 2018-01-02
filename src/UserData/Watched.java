@@ -4,19 +4,19 @@ import Watchables.Programme;
 
 public class Watched {
     private int percentage;
-    private Profile profile;
-    private Programme programme;
+    private String profileName;
+    private String programmeID;
 
-    public Watched(int percentage, Profile profile, Programme programme) {
+    public Watched(int percentage, String profileName, String programmeID) {
         this.percentage = percentage;
-        this.profile = profile;
-        this.programme = programme;
+        this.profileName = profileName;
+        this.programmeID = programmeID;
     }
 
-    public Watched(Profile profile, Programme programme) {
+    public Watched(String profileName, String programmeID) {
         this.percentage = 0;
-        this.profile = profile;
-        this.programme = programme;
+        this.profileName = profileName;
+        this.programmeID = programmeID;
     }
 
     public int getPercentage() {
@@ -27,20 +27,20 @@ public class Watched {
         this.percentage = percentage;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public String getprofileName() {
+        return profileName;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setProfile(String profileName) {
+        this.profileName = profileName;
     }
 
-    public Programme getProgramme() {
-        return programme;
+    public String GetProgrammeID() {
+        return programmeID;
     }
 
     public void setProgramme(Programme programme) {
-        this.programme = programme;
+        this.programmeID = programmeID;
     }
 
     public void incrementPercentage(){
