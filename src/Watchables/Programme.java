@@ -2,12 +2,12 @@ package Watchables;
 
 import java.sql.Time;
 
-public class Programme {
+public abstract class Programme {
     private int programmeID;
     private String title;
-    private Time duration;
+    private String duration;
 
-    public Programme(int programmeID, String title, Time duration) {
+    public Programme(int programmeID, String title, String duration) {
         this.programmeID = programmeID;
         this.title = title;
         this.duration = duration;
@@ -29,11 +29,11 @@ public class Programme {
         this.title = title;
     }
 
-    public Time getDuration() {
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(Time duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 }

@@ -6,7 +6,7 @@ public class Episode extends Programme {
     private String season;
     private Series series;
 
-    public Episode(int programmeID, String title, Time duration, String season, Series series) {
+    public Episode(int programmeID, String title, String duration, String season, Series series) {
         super(programmeID, title, duration);
         this.season = season;
         this.series = series;

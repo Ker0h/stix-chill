@@ -19,8 +19,8 @@ public class Starter {
 
         Series sherlock = new Series("Sherlock", "English", "Detective", 13);
 
-        //Episode baskervilleHounds = new Episode(1234, "The Hounds of Baskerville", , "S01E01", sherlock);
-       // Episode blackBride = new Episode(4567, "The Black Bride", , "S01E02", sherlock);
+        Episode baskervilleHounds = new Episode(1234, "The Hounds of Baskerville", "01:30:00", "S01E01", sherlock);
+        Episode blackBride = new Episode(4567, "The Black Bride", "02:00:00", "S01E02", sherlock);
 
         System.out.println(ywillems.getDateOfBirth());
 
