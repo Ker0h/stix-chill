@@ -1,7 +1,5 @@
 package Watchables;
 
-import java.sql.Time;
-
 public class Episode extends Programme {
     private String season;
     private Series series;
