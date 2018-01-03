@@ -40,25 +40,23 @@ public class UserInterface implements Runnable {
         BorderLayout layout = new BorderLayout();
 
         JPanel averageSeries = new JPanel(layout);
-
-        JComboBox selectSeries = new JComboBox();
-        for(Series s : exe.getSeries()){
-            selectSeries.addItem(new ComboModel(s.getSeriesTitle(), s));
-        }
-        selectSeries.addActionListener(new averageSeriesListener());
-
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
         model.addColumn("Episode");
         model.addColumn("%");
-
         //model.addRow(new Object[]{"v1", "v2"});
-        
+
+        JComboBox c = new JComboBox();
+        for(Series s : exe.getSeries()){
+            c.addItem(new ComboModel(s.getSeriesTitle(), s));
+        }
+        c.addActionListener(new averageSeriesListener(table, c));
+
         JScrollPane tableContainer = new JScrollPane(table);
 
         averageSeries.add(tableContainer, BorderLayout.EAST);
 
-        averageSeries.add(selectSeries, BorderLayout.NORTH);
+        averageSeries.add(c, BorderLayout.NORTH);
 
         JPanel singleProfile = new JPanel(layout);
         JTextArea profileArea = new JTextArea();

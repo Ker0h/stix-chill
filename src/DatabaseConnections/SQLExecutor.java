@@ -32,7 +32,7 @@ public class SQLExecutor {
 
                 Account acc = new Account(subNo,name,streetName,houseNumber,postalCode,city);
                 accounts.add(acc);
-                System.out.println(acc.toString());
+               // System.out.println(acc.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class SQLExecutor {
                 account.addProfile(prof);
                 profiles.add(prof);
             }
-            System.out.println(account.toString());
+            //System.out.println(account.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,7 +108,7 @@ public class SQLExecutor {
                 ser.addEpisode(ep);
                 episodes.add(ep);
             }
-            System.out.println(ser);
+            //System.out.println(ser);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +160,7 @@ public class SQLExecutor {
                 prof.addWatched(watch);
                 watched.add(watch);
             }
-            System.out.println(prof.toString());
+            //System.out.println(prof.toString());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -185,7 +185,7 @@ public class SQLExecutor {
                 film.addWatched(watch);
                 watched.add(watch);
             }
-            System.out.println(film.toString());
+            //System.out.println(film.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -211,7 +211,7 @@ public class SQLExecutor {
                 episode.addWatched(watch);
                 watched.add(watch);
             }
-            System.out.println(episode.toString());
+            //System.out.println(episode.toString());
 
         } catch (Exception e) {
             e.printStackTrace();
