@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserInterface implements Runnable {
     private JFrame frame;
@@ -70,13 +71,17 @@ public class UserInterface implements Runnable {
 
     private JPanel createSingleProfileAccountsPanel(BorderLayout layout){
         JPanel singleProfile = new JPanel(layout);
-        //Account.getSingleProfileAccounts();
 
         DefaultTableModel singleProfileModel = new DefaultTableModel();
         JTable singleProfileAccountTable = new JTable(singleProfileModel);
 
         singleProfileModel.addColumn("Accounts");
+        for(Account a:exe.getAccounts()){
+            if(a.getProfiles().size() == 1);
+            singleProfileModel.addRow(new Object[]{a.getSubscriberNumber()});
+        }
 
+        singleProfile.add(singleProfileAccountTable);
         return singleProfile;
     }
 
