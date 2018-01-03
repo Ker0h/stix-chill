@@ -40,6 +40,23 @@ public class UserInterface implements Runnable {
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.LEFT);
         BorderLayout layout = new BorderLayout();
 
+        tabbedPane.add("Homepage", createHomepagePanel(layout));
+        tabbedPane.add("Average watchtime by series", createAverageSeriesPanel(layout));
+        tabbedPane.add("Accounts with a single profile", createSingleProfileAccountsPanel(layout));
+
+        return tabbedPane;
+    }
+
+    private JPanel createHomepagePanel(BorderLayout layout){
+        JPanel homepagePanel = new JPanel(layout);
+        JLabel welcomeText = new JLabel("Welcome to Stix & Chill");
+        welcomeText.setFont(new Font("Serif", Font.PLAIN, 30));
+
+        homepagePanel.add(welcomeText, BorderLayout.NORTH);
+        return homepagePanel;
+    }
+
+    private JPanel createAverageSeriesPanel(BorderLayout layout) {
         JPanel averageSeries = new JPanel(layout);
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
