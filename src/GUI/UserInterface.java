@@ -35,6 +35,7 @@ public class UserInterface implements Runnable {
         tabbedPane.add("Average watchtime by series", new AverageSeriesPanel(exe));
         tabbedPane.add("Accounts with a single profile", new SingleProfileAccountsPanel(exe));
         tabbedPane.add("Account average watchtime per series", new AverageSeriePerAccountPanel(exe));
+        tabbedPane.add("Films per PG-rating", new FilmsForMinorsPanel(exe));
 
         return tabbedPane;
     }

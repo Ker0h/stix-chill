@@ -3,7 +3,7 @@ package DatabaseConnections;
 import java.sql.*;
 
 public class DBConnector {
-    private Connection con = null;
+    private static Connection con = null;
     private final String connectionUrl = "jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=Stix;integratedSecurity=true;";
 
     protected DBConnector() {
@@ -22,6 +22,10 @@ public class DBConnector {
     protected ResultSet runSQL(String sql) throws SQLException {
         Statement stmt = con.createStatement();
         return stmt.executeQuery(sql);
+    }
+
+    public static Connection getCon() {
+        return con;
     }
 
     @Override

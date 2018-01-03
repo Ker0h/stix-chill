@@ -144,6 +144,35 @@ public class SQLExecutor {
         return films;
     }
 
+    public List<Film> getLongestFilmForMinors(Object age){
+        List<Film> films = new ArrayList<>();
+
+        try {
+            PreparedStatement SQL = DBConnector.getCon().prepareStatement("SELECT TOP 1 * FROM Film f JOIN Programe p on p.ProgrameID = f.ProgrameID WHERE PG <= ? ORDER BY Duration DESC");
+            SQL.setString(1, age.toString());
+            resultSet = SQL.executeQuery();
+
+
+            while (resultSet.next()) {
+                int programmeID = resultSet.getInt("ProgrameID");
+                String title = resultSet.getString("Title");
+                String duration = resultSet.getString("Duration");
+                String genre = resultSet.getString("Genre");
+                String language = resultSet.getString("Language");
+                int pg = resultSet.getInt("PG");
+
+                Film film = new Film(programmeID, title, duration, genre, language, pg);
+                films.add(film);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+        System.out.println(films);
+        return films;
+    }
+
     public List<Watched> getWatched(Profile prof){
         List<Watched> watched = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
