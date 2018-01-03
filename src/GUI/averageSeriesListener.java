@@ -24,16 +24,19 @@ public class averageSeriesListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        //get the Episodes from the selected option from the Jcombobox.
         SQLExecutor sql = new SQLExecutor();
         ArrayList<Series> x = (ArrayList<Series>) sql.getSeries();
         Series s = x.get(c.getSelectedIndex());
         ArrayList<Episode> z = (ArrayList<Episode>) sql.getEpisodes(s);
 
-        ArrayList<String> episodeName = new ArrayList<>();
+        //Make 2 new arraylists for the end result.
+        ArrayList<String> episodeNames = new ArrayList<>();
         ArrayList<Double> percentage = new ArrayList<>();
+
+        //loop through every Episode to get all the people who watched the episode with the percentage they watched.
         for(Episode epi : z){
             ArrayList<Watched> w = (ArrayList<Watched>) sql.getWatched(epi);
-            System.out.println(w);
             double t = 0;
             double totalPer = 0;
             for (Watched wat : w){
@@ -44,21 +47,23 @@ public class averageSeriesListener implements ActionListener {
             if (Double.isNaN(calculatedPer)){
                 calculatedPer = 0;
             }
-            episodeName.add(epi.getTitle());
+            episodeNames.add(epi.getTitle());
             percentage.add(calculatedPer);
         }
-        System.out.println(episodeName);
-        System.out.println(percentage);
 
+        //make a new tableModel with 2 columns
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Title");
         model.addColumn("%");
 
+        // add the rows with episode names and percentage watched
         int i = 0;
-        for(String episodename : episodeName){
-            model.addRow(new Object[]{episodename, percentage.get(i)});
+        for(String episodeName : episodeNames){
+            model.addRow(new Object[]{episodeName, percentage.get(i)});
             i++;
         }
+        
+        //update the table you already made with the new model
         t.setModel(model);
     }
 }
