@@ -39,7 +39,15 @@ public class UserInterface implements Runnable {
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.LEFT);
         BorderLayout layout = new BorderLayout();
 
+        tabbedPane.add("Average watchtime by series", createAverageSeriesPanel(layout));
+        tabbedPane.add("Accounts with a single profile", createSingleProfileAccountsPanel(layout));
+
+        return tabbedPane;
+    }
+
+    private JPanel createAverageSeriesPanel(BorderLayout layout) {
         JPanel averageSeries = new JPanel(layout);
+<<<<<<< HEAD
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
         model.addColumn("Episode");
@@ -57,18 +65,39 @@ public class UserInterface implements Runnable {
         averageSeries.add(tableContainer, BorderLayout.EAST);
 
         averageSeries.add(c, BorderLayout.NORTH);
+=======
 
+        JComboBox selectSeries = new JComboBox();
+        for(Series s : exe.getSeries()){
+            selectSeries.addItem(new ComboModel(s.getSeriesTitle(), s));
+        }
+        selectSeries.addActionListener(new averageSeriesListener());
+
+        DefaultTableModel averageSeriesModel = new DefaultTableModel();
+        JTable averageSeriesTable = new JTable(averageSeriesModel);
+        averageSeriesModel.addColumn("Episode");
+        averageSeriesModel.addColumn("%");
+
+        //model.addRow(new Object[]{"v1", "v2"});
+
+        JScrollPane averageSeriesContainer = new JScrollPane(averageSeriesTable);
+        averageSeries.add(averageSeriesContainer, BorderLayout.EAST);
+        averageSeries.add(selectSeries, BorderLayout.NORTH);
+>>>>>>> develop
+
+        return averageSeries;
+    }
+
+    private JPanel createSingleProfileAccountsPanel(BorderLayout layout){
         JPanel singleProfile = new JPanel(layout);
-        JTextArea profileArea = new JTextArea();
-        JScrollPane profileScroll = new JScrollPane(profileArea);
-
         //Account.getSingleProfileAccounts();
-        singleProfile.add(profileScroll);
 
-        tabbedPane.add("Average watchtime by series", averageSeries);
-        tabbedPane.add("Accounts with a single profile", singleProfile);
+        DefaultTableModel singleProfileModel = new DefaultTableModel();
+        JTable singleProfileAccountTable = new JTable(singleProfileModel);
 
-        return tabbedPane;
+        singleProfileModel.addColumn("Accounts");
+
+        return singleProfile;
     }
 
     private JPanel createFooterPanel(){
