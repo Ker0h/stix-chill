@@ -39,6 +39,13 @@ public class UserInterface implements Runnable {
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.LEFT);
         BorderLayout layout = new BorderLayout();
 
+        tabbedPane.add("Average watchtime by series", createAverageSeriesPanel(layout));
+        tabbedPane.add("Accounts with a single profile", createSingleProfileAccountsPanel(layout));
+
+        return tabbedPane;
+    }
+
+    private JPanel createAverageSeriesPanel(BorderLayout layout) {
         JPanel averageSeries = new JPanel(layout);
 
         JComboBox selectSeries = new JComboBox();
@@ -47,30 +54,30 @@ public class UserInterface implements Runnable {
         }
         selectSeries.addActionListener(new averageSeriesListener());
 
-        DefaultTableModel model = new DefaultTableModel();
-        JTable table = new JTable(model);
-        model.addColumn("Episode");
-        model.addColumn("%");
+        DefaultTableModel averageSeriesModel = new DefaultTableModel();
+        JTable averageSeriesTable = new JTable(averageSeriesModel);
+        averageSeriesModel.addColumn("Episode");
+        averageSeriesModel.addColumn("%");
 
         //model.addRow(new Object[]{"v1", "v2"});
-        
-        JScrollPane tableContainer = new JScrollPane(table);
 
-        averageSeries.add(tableContainer, BorderLayout.EAST);
-
+        JScrollPane averageSeriesContainer = new JScrollPane(averageSeriesTable);
+        averageSeries.add(averageSeriesContainer, BorderLayout.EAST);
         averageSeries.add(selectSeries, BorderLayout.NORTH);
 
+        return averageSeries;
+    }
+
+    private JPanel createSingleProfileAccountsPanel(BorderLayout layout){
         JPanel singleProfile = new JPanel(layout);
-        JTextArea profileArea = new JTextArea();
-        JScrollPane profileScroll = new JScrollPane(profileArea);
-
         //Account.getSingleProfileAccounts();
-        singleProfile.add(profileScroll);
 
-        tabbedPane.add("Average watchtime by series", averageSeries);
-        tabbedPane.add("Accounts with a single profile", singleProfile);
+        DefaultTableModel singleProfileModel = new DefaultTableModel();
+        JTable singleProfileAccountTable = new JTable(singleProfileModel);
 
-        return tabbedPane;
+        singleProfileModel.addColumn("Accounts");
+
+        return singleProfile;
     }
 
     private JPanel createFooterPanel(){
