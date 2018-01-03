@@ -59,7 +59,6 @@ public class averageSeriesListener implements ActionListener {
             model.addRow(new Object[]{episodename, percentage.get(i)});
             i++;
         }
-        
         t.setModel(model);
     }
 }

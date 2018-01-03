@@ -44,7 +44,6 @@ public class UserInterface implements Runnable {
         JTable table = new JTable(model);
         model.addColumn("Episode");
         model.addColumn("%");
-        //model.addRow(new Object[]{"v1", "v2"});
 
         JComboBox c = new JComboBox();
         for(Series s : exe.getSeries()){
