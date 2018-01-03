@@ -1,4 +1,4 @@
-package GUI;
+package ActionListeners;
 
 import DatabaseConnections.SQLExecutor;
 import UserData.Watched;

@@ -32,78 +32,16 @@ public class UserInterface implements Runnable {
     private void createComponents(Container container) {
         container.setLayout(new BorderLayout());
         container.add(createMenuPanel(), BorderLayout.CENTER);
-        container.add(createFooterPanel(), BorderLayout.SOUTH);
+        container.add(new FooterPanel(), BorderLayout.SOUTH);
     }
-
 
     private JTabbedPane createMenuPanel(){
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.LEFT);
-        BorderLayout layout = new BorderLayout();
 
-        tabbedPane.add("Homepage", createHomepagePanel(layout));
-        tabbedPane.add("Average watchtime by series", createAverageSeriesPanel(layout));
-        tabbedPane.add("Accounts with a single profile", createSingleProfileAccountsPanel(layout));
+        tabbedPane.add("Homepage", new HomepagePanel());
+        tabbedPane.add("Average watchtime by series", new AverageSeriesPanel(exe));
+        tabbedPane.add("Accounts with a single profile", new SingleProfileAccountsPanel(exe));
 
         return tabbedPane;
     }
-
-    private JPanel createHomepagePanel(BorderLayout layout){
-        JPanel homepagePanel = new JPanel(layout);
-        JLabel welcomeText = new JLabel("Welcome to Stix & Chill");
-        welcomeText.setFont(new Font("Serif", Font.PLAIN, 30));
-
-        homepagePanel.add(welcomeText, BorderLayout.NORTH);
-        return homepagePanel;
-    }
-
-    private JPanel createSingleProfileAccountsPanel(BorderLayout layout){
-        JPanel singleProfile = new JPanel(layout);
-        DefaultTableModel singleProfileModel = new DefaultTableModel();
-        JTable singleProfileAccountTable = new JTable(singleProfileModel);
-        singleProfileModel.addColumn("Accounts with a single profile");
-
-        for(Account a:exe.getAccounts()){
-            if(a.getProfiles().size() == 1);
-            singleProfileModel.addRow(new Object[]{a.getSubscriberNumber()});
-        }
-
-        singleProfile.add(singleProfileAccountTable);
-        return singleProfile;
-    }
-    
-    private JPanel createAverageSeriesPanel(BorderLayout layout) {
-        JPanel averageSeries = new JPanel(layout);
-        DefaultTableModel model = new DefaultTableModel();
-        JTable table = new JTable(model);
-        model.addColumn("Episode");
-        model.addColumn("%");
-
-        JComboBox c = new JComboBox();
-        for(Series s : exe.getSeries()){
-            c.addItem(new ComboModel(s.getSeriesTitle(), s));
-        }
-        c.addActionListener(new averageSeriesListener(table, c));
-
-        JScrollPane tableContainer = new JScrollPane(table);
-
-        averageSeries.add(tableContainer, BorderLayout.EAST);
-        averageSeries.add(c, BorderLayout.NORTH);
-        return averageSeries;
-    }
-
-    private JPanel createFooterPanel(){
-        JPanel panel = new JPanel();
-        FlowLayout layout = new FlowLayout();
-        panel.setLayout(layout);
-
-        panel.add(new JLabel("Informatica"));
-        panel.add(new JLabel("2017"));
-        panel.add(new JLabel("Klas F"));
-        panel.add(new JLabel("Stijn van Veen, <studentnummer>"));
-        panel.add(new JLabel("Yannick Willems, 2128086"));
-        panel.add(new JLabel("Jop van Wijnen, <studentnummer>"));
-
-        return panel;
-    }
-
 }
