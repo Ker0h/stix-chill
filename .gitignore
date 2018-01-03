@@ -145,3 +145,5 @@ fabric.properties
 \.idea/
 
 stix-chill\.iml
+
+*.xml

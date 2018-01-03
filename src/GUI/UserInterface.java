@@ -56,6 +56,21 @@ public class UserInterface implements Runnable {
         return homepagePanel;
     }
 
+    private JPanel createSingleProfileAccountsPanel(BorderLayout layout){
+        JPanel singleProfile = new JPanel(layout);
+        DefaultTableModel singleProfileModel = new DefaultTableModel();
+        JTable singleProfileAccountTable = new JTable(singleProfileModel);
+        singleProfileModel.addColumn("Accounts with a single profile");
+
+        for(Account a:exe.getAccounts()){
+            if(a.getProfiles().size() == 1);
+            singleProfileModel.addRow(new Object[]{a.getSubscriberNumber()});
+        }
+
+        singleProfile.add(singleProfileAccountTable);
+        return singleProfile;
+    }
+    
     private JPanel createAverageSeriesPanel(BorderLayout layout) {
         JPanel averageSeries = new JPanel(layout);
         DefaultTableModel model = new DefaultTableModel();
@@ -72,20 +87,8 @@ public class UserInterface implements Runnable {
         JScrollPane tableContainer = new JScrollPane(table);
 
         averageSeries.add(tableContainer, BorderLayout.EAST);
-
         averageSeries.add(c, BorderLayout.NORTH);
-
-        JPanel singleProfile = new JPanel(layout);
-        JTextArea profileArea = new JTextArea();
-        JScrollPane profileScroll = new JScrollPane(profileArea);
-
-        //Account.getSingleProfileAccounts();
-        singleProfile.add(profileScroll);
-
-        tabbedPane.add("Average watchtime by series", averageSeries);
-        tabbedPane.add("Accounts with a single profile", singleProfile);
-
-        return tabbedPane;
+        return averageSeries;
     }
 
     private JPanel createFooterPanel(){
