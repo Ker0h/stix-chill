@@ -45,7 +45,7 @@ public class UserInterface implements Runnable {
         for(Series s : exe.getSeries()){
             selectSeries.addItem(new ComboModel(s.getSeriesTitle(), s));
         }
-
+        selectSeries.addActionListener(new averageSeriesListener());
 
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
