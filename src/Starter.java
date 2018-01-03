@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Starter {
     public static void main(String args[]) throws Exception {
-        System.out.println("Hello Bitches");
+        System.out.println("Welcome to stix and chill");
 
         Account jop = new Account(110110, "Jop van Wijnen", "Stratenstraat", "1", "4678AB", "Breda");
         Account stijn = new Account(123456, "Stijn van Veen", "Wegenweg", "33", "5690BN", "Bergen op Zoom");

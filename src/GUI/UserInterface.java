@@ -1,13 +1,19 @@
 package GUI;
 
+import DatabaseConnections.SQLExecutor;
 import Watchables.*;
 import UserData.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class UserInterface implements Runnable {
     private JFrame frame;
+    SQLExecutor exe = new SQLExecutor();
 
     @Override
     public void run() {
@@ -34,7 +40,24 @@ public class UserInterface implements Runnable {
         BorderLayout layout = new BorderLayout();
 
         JPanel averageSeries = new JPanel(layout);
-        JComboBox<Series> selectSeries = new JComboBox();
+
+        JComboBox selectSeries = new JComboBox();
+        for(Series s : exe.getSeries()){
+            selectSeries.addItem(new ComboModel(s.getSeriesTitle(), s));
+        }
+
+
+        DefaultTableModel model = new DefaultTableModel();
+        JTable table = new JTable(model);
+        model.addColumn("Episode");
+        model.addColumn("%");
+
+        //model.addRow(new Object[]{"v1", "v2"});
+        
+        JScrollPane tableContainer = new JScrollPane(table);
+
+        averageSeries.add(tableContainer, BorderLayout.EAST);
+
         averageSeries.add(selectSeries, BorderLayout.NORTH);
 
         JPanel singleProfile = new JPanel(layout);
@@ -64,6 +87,5 @@ public class UserInterface implements Runnable {
 
         return panel;
     }
-
 
 }

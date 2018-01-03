@@ -49,6 +49,9 @@ public class Watched {
 
     public void incrementPercentage(int amount){
         this.percentage += amount;
+        if(this.percentage > 100){
+            this.percentage = 100;
+        }
     }
 
     @Override
