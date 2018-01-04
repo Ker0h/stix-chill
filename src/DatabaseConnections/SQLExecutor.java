@@ -169,7 +169,6 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
-        System.out.println(films);
         return films;
     }
 
