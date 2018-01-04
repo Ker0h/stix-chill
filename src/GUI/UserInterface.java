@@ -50,6 +50,7 @@ public class UserInterface implements Runnable {
 
         tabbedPane.add("Accounts", new AccountsPanel(exe));
         tabbedPane.add("Profiles", new ProfilesPanel(exe));
+        tabbedPane.add("Watched", new WatchedPanel(exe));
 
         return tabbedPane;
     }

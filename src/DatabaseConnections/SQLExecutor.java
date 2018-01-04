@@ -5,6 +5,7 @@ import UserData.Profile;
 import UserData.Watched;
 import Watchables.Episode;
 import Watchables.Film;
+import Watchables.Programme;
 import Watchables.Series;
 
 import java.sql.*;
@@ -221,6 +222,28 @@ public class SQLExecutor {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
+    }
+
+    public String getProgrammeTitleByID(int ProgrammeID) {
+        DBConnector dbConnector = new DBConnector();
+        String title = "";
+        try {
+            String SQL = "SELECT Title FROM Programe JOIN Watched ON Programe.ProgrameID = Watched.ProgrameID WHERE Watched.ProgrameID = '" + ProgrammeID + "'";
+            resultSet = dbConnector.runSQL(SQL);
+
+            while (resultSet.next()) {
+                title = resultSet.getString("Title");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try {
+                resultSet.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return title;
     }
 
     public List<Watched> getWatched(Account acc, Series ser){
