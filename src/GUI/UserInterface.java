@@ -49,6 +49,7 @@ public class UserInterface implements Runnable {
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 
         tabbedPane.add("Accounts", new AccountsPanel(exe));
+        tabbedPane.add("Profiles", new ProfilesPanel(exe));
 
         return tabbedPane;
     }
