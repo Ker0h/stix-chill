@@ -24,7 +24,7 @@ public class AverageSeriesPanel extends JPanel {
 
         JScrollPane tableContainer = new JScrollPane(table);
 
-        this.add(tableContainer, BorderLayout.EAST);
+        this.add(tableContainer, BorderLayout.CENTER);
         this.add(c, BorderLayout.NORTH);
     }
 }
