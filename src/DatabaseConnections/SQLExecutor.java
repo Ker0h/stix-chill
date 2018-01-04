@@ -37,6 +37,7 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return accounts;
@@ -62,6 +63,7 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return profiles;
@@ -87,6 +89,7 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return series;
@@ -113,6 +116,7 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return episodes;
@@ -139,6 +143,7 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return films;
@@ -146,12 +151,11 @@ public class SQLExecutor {
 
     public List<Film> getLongestFilmForMinors(Object age){
         List<Film> films = new ArrayList<>();
+        DBConnector dbConnector = new DBConnector();
 
         try {
-            PreparedStatement SQL = DBConnector.getCon().prepareStatement("SELECT TOP 1 * FROM Film f JOIN Programe p on p.ProgrameID = f.ProgrameID WHERE PG <= ? ORDER BY Duration DESC");
-            SQL.setString(1, age.toString());
-            resultSet = SQL.executeQuery();
-
+            String SQL = "SELECT TOP 1 * FROM Film f JOIN Programe p on p.ProgrameID = f.ProgrameID WHERE PG <= " + age + " ORDER BY Duration DESC";
+            resultSet = dbConnector.runSQL(SQL);
 
             while (resultSet.next()) {
                 int programmeID = resultSet.getInt("ProgrameID");
@@ -167,6 +171,7 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return films;
@@ -188,10 +193,10 @@ public class SQLExecutor {
                 prof.addWatched(watch);
                 watched.add(watch);
             }
-            //System.out.println(prof.toString());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
@@ -223,6 +228,7 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
@@ -244,11 +250,10 @@ public class SQLExecutor {
                 film.addWatched(watch);
                 watched.add(watch);
             }
-            //System.out.println(film.toString());
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
@@ -270,11 +275,10 @@ public class SQLExecutor {
                 episode.addWatched(watch);
                 watched.add(watch);
             }
-            //System.out.println(episode.toString());
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;

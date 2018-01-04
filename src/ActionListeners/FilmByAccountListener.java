@@ -25,11 +25,10 @@ public class FilmByAccountListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //get the Episodes from the selected option from the Jcombobox.
+        //get the accounts, films, profiles and watched data from the database.
         SQLExecutor sql = new SQLExecutor();
         ArrayList<Account> ac = (ArrayList<Account>) sql.getAccounts();
         Account acc = ac.get(c.getSelectedIndex());
-        System.out.println(acc);
         ArrayList<Film> fi = (ArrayList<Film>) sql.getFilms();
         ArrayList<Profile> pr = (ArrayList<Profile>) sql.getProfiles(acc);
         ArrayList<List<Watched>> wa = new ArrayList<>();

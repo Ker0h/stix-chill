@@ -24,7 +24,11 @@ public class DBConnector {
         return stmt.executeQuery(sql);
     }
 
-    public static Connection getCon() {
+    protected void closeConnection(){
+        if (con != null) try { con.close(); } catch(Exception e) {e.printStackTrace();}
+    }
+
+    protected static Connection getCon() {
         return con;
     }
 

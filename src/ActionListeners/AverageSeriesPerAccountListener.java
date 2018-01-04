@@ -61,7 +61,7 @@ public class AverageSeriesPerAccountListener implements ActionListener {
             season.add(epi.getSeason());
         }
 
-        //make a new tableModel with 2 columns
+        //make a new tableModel with 3 columns
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Title");
         model.addColumn("Season");
