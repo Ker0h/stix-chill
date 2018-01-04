@@ -1,16 +1,9 @@
 package GUI;
 
 import DatabaseConnections.SQLExecutor;
-import Watchables.*;
-import UserData.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserInterface implements Runnable {
     private JFrame frame;
@@ -41,6 +34,7 @@ public class UserInterface implements Runnable {
         tabbedPane.add("Homepage", new HomepagePanel());
         tabbedPane.add("Average watchtime by series", new AverageSeriesPanel(exe));
         tabbedPane.add("Accounts with a single profile", new SingleProfileAccountsPanel(exe));
+        tabbedPane.add("Account average watchtime per series", new AverageSeriePerAccountPanel(exe));
 
         return tabbedPane;
     }

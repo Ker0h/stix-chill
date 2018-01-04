@@ -169,6 +169,35 @@ public class SQLExecutor {
         return watched;
     }
 
+    public List<Watched> getWatched(Account acc, Series ser){
+        List<Watched> watched = new ArrayList<>();
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "SELECT w.Percentage, w.ProfileName, w.ProgrameID FROM Watched w\n" +
+                    "join Profile p on p.ProfileName = w.ProfileName\n" +
+                    "join Account a on a.SubscriberNumber = p.SubscriberNumber\n" +
+                    "join Episode e on e.ProgrameID = w.ProgrameID\n" +
+                    "join Series s on s.SerieTitle = e.SerieTitle\n" +
+                    "where s.SerieTitle = '" +ser.getSeriesTitle() + "' AND a.SubscriberNumber = '" +acc.getSubscriberNumber() + "'";
+            resultSet = dbConnector.runSQL(SQL);
+
+            while (resultSet.next()) {
+                int percentage = resultSet.getInt("Percentage");
+                String profileName = resultSet.getString("ProfileName");
+                int programmeID = resultSet.getInt("ProgrameID");
+
+                Watched watch = new Watched(percentage, profileName, programmeID);
+                watched.add(watch);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+        return watched;
+    }
+
     public List<Watched> getWatched(Film film){
         List<Watched> watched = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();

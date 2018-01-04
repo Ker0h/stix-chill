@@ -33,6 +33,7 @@ public class averageSeriesListener implements ActionListener {
         //Make 2 new arraylists for the end result.
         ArrayList<String> episodeNames = new ArrayList<>();
         ArrayList<Double> percentage = new ArrayList<>();
+        ArrayList<String> season = new ArrayList<>();
 
         //loop through every Episode to get all the people who watched the episode with the percentage they watched.
         for(Episode epi : z){
@@ -49,17 +50,19 @@ public class averageSeriesListener implements ActionListener {
             }
             episodeNames.add(epi.getTitle());
             percentage.add(calculatedPer);
+            season.add(epi.getSeason());
         }
 
         //make a new tableModel with 2 columns
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Title");
-        model.addColumn("%");
+        model.addColumn("Season");
+        model.addColumn("Percentage watched");
 
         // add the rows with episode names and percentage watched
         int i = 0;
         for(String episodeName : episodeNames){
-            model.addRow(new Object[]{episodeName, percentage.get(i)});
+            model.addRow(new Object[]{episodeName, season.get(i), percentage.get(i)});
             i++;
         }
         
