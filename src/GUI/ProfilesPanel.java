@@ -18,11 +18,11 @@ public class ProfilesPanel extends JPanel {
         }
 
         DefaultTableModel model = new DefaultTableModel();
+        JTable table = new JTable(model);
         model.addColumn("Name");
         model.addColumn("Date of birth");
-        selectAccount.addActionListener(new ProfilesListener(selectAccount, model, exe));
+        selectAccount.addActionListener(new ProfilesListener(selectAccount, table, exe));
 
-        JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
 
         this.add(selectAccount, BorderLayout.NORTH);
