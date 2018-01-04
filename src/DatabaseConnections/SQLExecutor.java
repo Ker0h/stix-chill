@@ -32,12 +32,43 @@ public class SQLExecutor {
 
                 Account acc = new Account(subNo,name,streetName,houseNumber,postalCode,city);
                 accounts.add(acc);
-               // System.out.println(acc.toString());
+                // System.out.println(acc.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+        return accounts;
+    }
+
+    public List<Account> getAccount(String sub) {
+        List<Account> accounts = new ArrayList<>();
+        DBConnector dbConnector = new DBConnector();
+        try {
+            PreparedStatement SQL = DBConnector.getCon().prepareStatement("SELECT * FROM Account WHERE SubscriberNumber = ?");
+            SQL.setString(1, sub);
+            resultSet = SQL.executeQuery();
+
+            while (resultSet.next()) {
+                int subNo = resultSet.getInt("SubscriberNumber");
+                String name = resultSet.getString("Name");
+                String streetName = resultSet.getString("StreetName");
+                String postalCode = resultSet.getString("PostalCode");
+                String houseNumber = resultSet.getString("HouseNumber");
+                String city = resultSet.getString("City");
+
+                Account acc = new Account(subNo, name, streetName, houseNumber, postalCode, city);
+                accounts.add(acc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try {
+                resultSet.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return accounts;
     }
@@ -197,8 +228,6 @@ public class SQLExecutor {
         return watched;
     }
 
-
-
     public List<Watched> getWatched(Account acc, Series ser){
         List<Watched> watched = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
@@ -279,4 +308,30 @@ public class SQLExecutor {
         }
         return watched;
     }
+
+    public List<String> getProfilesThatCompletedAFilm(String film) {
+        List<String> profiles = new ArrayList<String>();
+
+        try {
+            PreparedStatement SQL = DBConnector.getCon().prepareStatement("SELECT Profile.SubscriberNumber, Profile.ProfileName, Profile.DateOfBirth FROM Profile JOIN Watched ON Profile.ProfileName = Watched.ProfileName JOIN Film ON Watched.ProgrameID = Film.ProgrameID JOIN Programe ON Film.ProgrameID = Programe.ProgrameID WHERE Percentage = 100 AND Programe.Title = ?");
+            SQL.setString(1, film);
+            resultSet = SQL.executeQuery();
+
+
+            while (resultSet.next()) {
+                String profileName = resultSet.getString("ProfileName");
+                profiles.add(profileName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try {
+                resultSet.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return profiles;
+    }
 }
+
