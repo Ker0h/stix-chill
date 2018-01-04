@@ -13,8 +13,8 @@ import java.lang.*;
 import java.util.ArrayList;
 
 public class averageSeriesListener implements ActionListener {
-    public JTable t;
-    public JComboBox c;
+    private JTable t;
+    private JComboBox c;
 
     public averageSeriesListener(JTable t, JComboBox c) {
         this.t = t;
