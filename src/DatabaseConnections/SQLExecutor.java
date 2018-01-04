@@ -197,6 +197,8 @@ public class SQLExecutor {
         return watched;
     }
 
+
+
     public List<Watched> getWatched(Account acc, Series ser){
         List<Watched> watched = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();

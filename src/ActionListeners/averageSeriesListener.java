@@ -13,8 +13,8 @@ import java.lang.*;
 import java.util.ArrayList;
 
 public class averageSeriesListener implements ActionListener {
-    public JTable t;
-    public JComboBox c;
+    private JTable t;
+    private JComboBox c;
 
     public averageSeriesListener(JTable t, JComboBox c) {
         this.t = t;
@@ -30,7 +30,7 @@ public class averageSeriesListener implements ActionListener {
         Series s = x.get(c.getSelectedIndex());
         ArrayList<Episode> z = (ArrayList<Episode>) sql.getEpisodes(s);
 
-        //Make 2 new arraylists for the end result.
+        //Make 3 new arraylists for the end result.
         ArrayList<String> episodeNames = new ArrayList<>();
         ArrayList<Double> percentage = new ArrayList<>();
         ArrayList<String> season = new ArrayList<>();

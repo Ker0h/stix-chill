@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class AverageSeriesPerAccountListener implements ActionListener {
-    public JTable t;
-    public JComboBox ca;
-    public JComboBox cs;
+    private JTable t;
+    private JComboBox ca;
+    private JComboBox cs;
 
     public AverageSeriesPerAccountListener(JTable t, JComboBox ca, JComboBox cs) {
         this.t = t;
@@ -25,8 +25,6 @@ public class AverageSeriesPerAccountListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(ca.getSelectedItem());
-        System.out.println(cs.getSelectedItem());
 
         //get the Episodes from the selected option from the Jcombobox.
         SQLExecutor sql = new SQLExecutor();
@@ -37,10 +35,13 @@ public class AverageSeriesPerAccountListener implements ActionListener {
         Account acc = ac.get(ca.getSelectedIndex());
         ArrayList<Watched> wa = (ArrayList<Watched>) sql.getWatched(acc, s);
 
+        //Make 3 new arraylists for the end result.
         ArrayList<String> episodeNames = new ArrayList<>();
         ArrayList<Double> percentage = new ArrayList<>();
         ArrayList<String> season = new ArrayList<>();
 
+        //loop through every Episode to get the people who watched the episode with the percentage they watched.
+        // check in the seccond loop what episode is actually watched
         for(Episode epi : ep){
             double t = 0;
             double totalPer = 0;
@@ -50,7 +51,6 @@ public class AverageSeriesPerAccountListener implements ActionListener {
                     t++;
                     break;
                 }
-                totalPer = 0;
             }
             double calculatedPer = totalPer / t;
             if (Double.isNaN(calculatedPer)){
@@ -60,6 +60,7 @@ public class AverageSeriesPerAccountListener implements ActionListener {
             percentage.add(calculatedPer);
             season.add(epi.getSeason());
         }
+
         //make a new tableModel with 2 columns
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Title");
