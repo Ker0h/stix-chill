@@ -18,7 +18,8 @@ public class SingleProfileAccountsPanel extends JPanel {
             if(a.getProfiles().size() == 1);
             singleProfileModel.addRow(new Object[]{a.getSubscriberNumber()});
         }
+        JScrollPane scrollPane = new JScrollPane(singleProfileAccountTable);
 
-        this.add(singleProfileAccountTable, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 }
