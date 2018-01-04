@@ -5,7 +5,6 @@ import UserData.Profile;
 import UserData.Watched;
 import Watchables.Episode;
 import Watchables.Film;
-import Watchables.Programme;
 import Watchables.Series;
 
 import java.sql.*;
@@ -37,7 +36,6 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return accounts;
@@ -47,9 +45,7 @@ public class SQLExecutor {
         List<Account> accounts = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
-            PreparedStatement SQL = DBConnector.getCon().prepareStatement("SELECT * FROM Account WHERE SubscriberNumber = ?");
-            SQL.setString(1, sub);
-            resultSet = SQL.executeQuery();
+            resultSet = dbConnector.runSQL("SELECT * FROM Account WHERE SubscriberNumber = " + "'" + sub + "';");
 
             while (resultSet.next()) {
                 int subNo = resultSet.getInt("SubscriberNumber");
@@ -94,7 +90,6 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return profiles;
@@ -120,7 +115,6 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return series;
@@ -147,7 +141,6 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return episodes;
@@ -174,7 +167,6 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return films;
@@ -185,8 +177,7 @@ public class SQLExecutor {
         DBConnector dbConnector = new DBConnector();
 
         try {
-            String SQL = "SELECT TOP 1 * FROM Film f JOIN Programe p on p.ProgrameID = f.ProgrameID WHERE PG <= " + age + " ORDER BY Duration DESC";
-            resultSet = dbConnector.runSQL(SQL);
+            resultSet = dbConnector.runSQL("SELECT TOP 1 * FROM Film f JOIN Programe p on p.ProgrameID = f.ProgrameID WHERE PG <= " + "'" + age.toString() + "'" + "ORDER BY Duration DESC;");
 
             while (resultSet.next()) {
                 int programmeID = resultSet.getInt("ProgrameID");
@@ -202,7 +193,6 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return films;
@@ -224,10 +214,10 @@ public class SQLExecutor {
                 prof.addWatched(watch);
                 watched.add(watch);
             }
+            //System.out.println(prof.toString());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
@@ -257,7 +247,6 @@ public class SQLExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
@@ -279,10 +268,11 @@ public class SQLExecutor {
                 film.addWatched(watch);
                 watched.add(watch);
             }
+            //System.out.println(film.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
@@ -304,10 +294,11 @@ public class SQLExecutor {
                 episode.addWatched(watch);
                 watched.add(watch);
             }
+            //System.out.println(episode.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            dbConnector.closeConnection();
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return watched;
@@ -315,13 +306,9 @@ public class SQLExecutor {
 
     public List<String> getProfilesThatCompletedAFilm(String film) {
         List<String> profiles = new ArrayList<String>();
-
+        DBConnector dbConnector = new DBConnector();
         try {
-            PreparedStatement SQL = DBConnector.getCon().prepareStatement("SELECT Profile.SubscriberNumber, Profile.ProfileName, Profile.DateOfBirth FROM Profile JOIN Watched ON Profile.ProfileName = Watched.ProfileName JOIN Film ON Watched.ProgrameID = Film.ProgrameID JOIN Programe ON Film.ProgrameID = Programe.ProgrameID WHERE Percentage = 100 AND Programe.Title = ?");
-            SQL.setString(1, film);
-            resultSet = SQL.executeQuery();
-
-
+            resultSet = dbConnector.runSQL("SELECT Profile.SubscriberNumber, Profile.ProfileName, Profile.DateOfBirth FROM Profile JOIN Watched ON Profile.ProfileName = Watched.ProfileName JOIN Film ON Watched.ProgrameID = Film.ProgrameID JOIN Programe ON Film.ProgrameID = Programe.ProgrameID WHERE Percentage = 100 AND Programe.Title = " + "'" + film + "';");
             while (resultSet.next()) {
                 String profileName = resultSet.getString("ProfileName");
                 profiles.add(profileName);
