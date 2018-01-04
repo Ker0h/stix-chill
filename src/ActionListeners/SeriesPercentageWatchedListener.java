@@ -44,7 +44,7 @@ public class SeriesPercentageWatchedListener implements ActionListener {
             }
         }
 
-        //make a new tableModel with 3 columns
+        //make a new tableModel with 2 columns
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Title");
         model.addColumn("Percentage watched");

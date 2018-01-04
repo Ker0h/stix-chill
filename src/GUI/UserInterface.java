@@ -38,7 +38,8 @@ public class UserInterface implements Runnable {
         tabbedPane.add("Films per PG-rating", new FilmsForMinorsPanel(exe));
         tabbedPane.add("Films watched by account", new FilmsByAccountPanel(exe));
         tabbedPane.add("Profiles that completed a film", new ProfilesThatCompletedAFilmPanel(exe));
-        tabbedPane.add("EXTRA: Serie percentage watched as a whole", new SeriePercentageWatchedAsAWholePanel(exe));
+        tabbedPane.add("EXTRA: Series percentage watched as a whole", new SeriePercentageWatchedAsAWholePanel(exe));
+        tabbedPane.add("EXTRA: Film percentage and amount of views", new FilmPercentageAndAmountOfViewersPanel(exe));
         return tabbedPane;
     }
 }
