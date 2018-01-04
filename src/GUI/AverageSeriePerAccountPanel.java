@@ -40,7 +40,7 @@ public class AverageSeriePerAccountPanel extends JPanel {
         comboboxPanel.add(cs);
         JScrollPane tableContainer = new JScrollPane(table);
 
-        this.add(tableContainer, BorderLayout.EAST);
+        this.add(tableContainer, BorderLayout.CENTER);
         this.add(comboboxPanel, BorderLayout.NORTH);
 
     }

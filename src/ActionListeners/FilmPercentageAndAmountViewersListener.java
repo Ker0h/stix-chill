@@ -42,7 +42,7 @@ public class FilmPercentageAndAmountViewersListener implements ActionListener {
                 }
             }
         }
-        
+
         //make a new tableModel with 3 columns
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Title");
