@@ -39,6 +39,17 @@ public class UserInterface implements Runnable {
         tabbedPane.add("Films watched by account", new FilmsByAccountPanel(exe));
         tabbedPane.add("Profiles that completed a film", new ProfilesThatCompletedAFilmPanel(exe));
         tabbedPane.add("EXTRA: Serie percentage watched as a whole", new SeriePercentageWatchedAsAWholePanel(exe));
+
+
+        tabbedPane.add("Data", createDataPane());
+        return tabbedPane;
+    }
+
+    private JTabbedPane createDataPane(){
+        JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
+
+        tabbedPane.add("Accounts", new AccountsPanel(exe));
+
         return tabbedPane;
     }
 }
