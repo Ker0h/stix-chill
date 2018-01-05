@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    private int subscriberNumber;
+    private String subscriberNumber;
     private String name;
     private String streetName;
     private String houseNumber;
@@ -12,7 +12,7 @@ public class Account {
     private String city;
     private List profiles;
 
-    public Account(int subscriberNumber, String name, String streetName, String houseNumber, String postalCode, String city) {
+    public Account(String subscriberNumber, String name, String streetName, String houseNumber, String postalCode, String city) {
         this.subscriberNumber = subscriberNumber;
         this.name = name;
         this.streetName = streetName;
@@ -22,7 +22,7 @@ public class Account {
         this.profiles = new ArrayList<Profile>();
     }
 
-    public Account(int subscriberNumber, String name, String streetName, String houseNumber, String postalCode, String city, List profiles) {
+    public Account(String subscriberNumber, String name, String streetName, String houseNumber, String postalCode, String city, List profiles) {
         this.subscriberNumber = subscriberNumber;
         this.name = name;
         this.streetName = streetName;
@@ -32,11 +32,11 @@ public class Account {
         this.profiles = profiles;
     }
 
-    public int getSubscriberNumber() {
+    public String getSubscriberNumber() {
         return subscriberNumber;
     }
 
-    public void setSubscriberNumber(int subscriberNumber) {
+    public void setSubscriberNumber(String subscriberNumber) {
         this.subscriberNumber = subscriberNumber;
     }
 

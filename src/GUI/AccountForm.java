@@ -1,7 +1,9 @@
 package GUI;
 
 import ActionListeners.InsertAccountListener;
+import ActionListeners.UpdateAccountListener;
 import DatabaseConnections.SQLExecutor;
+import UserData.Account;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,25 @@ import java.awt.*;
 public class AccountForm implements Runnable{
     private JFrame frame;
     private SQLExecutor exe;
+    private String actionCommand;
+    private String sub;
+    private String name;
+    private String street;
+    private String houseNumber;
+    private String postalCode;
+    private String city;
+
+    public AccountForm(SQLExecutor exe, String actionCommand, String sub, String name, String street, String houseNumber, String postalCode, String city) {
+        this.frame = new JFrame();
+        this.exe = exe;
+        this.actionCommand = actionCommand;
+        this.sub = sub;
+        this.name = name;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.postalCode = postalCode;
+        this.city = city;
+    }
 
     @Override
     public void run() {
@@ -53,7 +74,19 @@ public class AccountForm implements Runnable{
         cityLabel.setLabelFor(cityField);
 
         JButton submit = new JButton("Save account");
-        submit.addActionListener(new InsertAccountListener(exe, subField, nameField, streetField, houseNumberField, postalField, cityField));
+        if(actionCommand.equals("Add new account")){
+            frame.setTitle("Add new account");
+            submit.addActionListener(new InsertAccountListener(exe, subField, nameField, streetField, houseNumberField, postalField, cityField));
+        }else if(actionCommand.equals("Update account")){
+            frame.setTitle("Update account");
+            subField.setText(sub);
+            nameField.setText(name);
+            streetField.setText(street);
+            houseNumberField.setText(houseNumber);
+            postalField.setText(postalCode);
+            cityField.setText(city);
+            submit.addActionListener(new UpdateAccountListener(exe, subField, nameField, streetField, houseNumberField, postalField, cityField));
+        }
 
         panel.add(subLabel);
         panel.add(subField);

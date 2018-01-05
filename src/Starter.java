@@ -11,9 +11,9 @@ public class Starter {
     public static void main(String args[]) throws Exception {
         System.out.println("Welcome to stix and chill");
 
-        Account jop = new Account(110110, "Jop van Wijnen", "Stratenstraat", "1", "4678AB", "Breda");
-        Account stijn = new Account(123456, "Stijn van Veen", "Wegenweg", "33", "5690BN", "Bergen op Zoom");
-        Account yannick = new Account(987654, "Yannick Willems", "Liesbospark", "28", "4813HV", "Breda");
+        Account jop = new Account("110110", "Jop van Wijnen", "Stratenstraat", "1", "4678AB", "Breda");
+        Account stijn = new Account("123456", "Stijn van Veen", "Wegenweg", "33", "5690BN", "Bergen op Zoom");
+        Account yannick = new Account("987654", "Yannick Willems", "Liesbospark", "28", "4813HV", "Breda");
         List accounts = new ArrayList<Account>();
 
         accounts.add(jop);

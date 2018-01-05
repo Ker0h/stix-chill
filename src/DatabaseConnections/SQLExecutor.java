@@ -23,7 +23,7 @@ public class SQLExecutor {
             resultSet = dbConnector.runSQL(SQL);
 
             while (resultSet.next()) {
-                int subNo = resultSet.getInt("SubscriberNumber");
+                String subNo = resultSet.getString("SubscriberNumber");
                 String name = resultSet.getString("Name");
                 String streetName = resultSet.getString("StreetName");
                 String postalCode = resultSet.getString("PostalCode");
@@ -49,7 +49,7 @@ public class SQLExecutor {
             resultSet = dbConnector.runSQL("SELECT * FROM Account WHERE SubscriberNumber = " + "'" + sub + "';");
 
             while (resultSet.next()) {
-                int subNo = resultSet.getInt("SubscriberNumber");
+                String subNo = resultSet.getString("SubscriberNumber");
                 String name = resultSet.getString("Name");
                 String streetName = resultSet.getString("StreetName");
                 String postalCode = resultSet.getString("PostalCode");

@@ -18,7 +18,7 @@ public class Main {
         System.out.println("--------------------------------------------------------------------");
         sqlExecutor.getSeries();
         System.out.println("--------------------------------------------------------------------");
-        Account acc = new Account(1215426, "Fam. van Raalte", "Schopenhauerdijkje", "5","3991 ML" , "Houten");
+        Account acc = new Account("1215426", "Fam. van Raalte", "Schopenhauerdijkje", "5","3991 ML" , "Houten");
         sqlExecutor.getProfiles(acc);
         System.out.println("--------------------------------------------------------------------");
         Series ser = new Series("Sherlock", "Engels-Amerikaans", "Detective",12 ,"Fargo" );
