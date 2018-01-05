@@ -1,5 +1,6 @@
 package GUI;
 
+import ActionListeners.AccountFormListener;
 import DatabaseConnections.SQLExecutor;
 import UserData.Account;
 
@@ -25,6 +26,18 @@ public class AccountsPanel extends JPanel {
 
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
+
+        JPanel crudButtons = new JPanel(new FlowLayout());
+        JButton insert = new JButton("Add new account");
+        JButton edit = new JButton("Update account");
+        JButton delete = new JButton("Delete account");
+
+        insert.addActionListener(new AccountFormListener(exe));
+
+        crudButtons.add(insert);
+        crudButtons.add(edit);
+        crudButtons.add(delete);
         this.add(scrollPane, BorderLayout.CENTER);
+        this.add(crudButtons, BorderLayout.SOUTH);
     }
 }
