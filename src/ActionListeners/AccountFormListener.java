@@ -57,7 +57,6 @@ public class AccountFormListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(sub);
         SwingUtilities.invokeLater(new AccountForm(exe, e.getActionCommand(), sub, name, street, houseNumber, postalCode, city));
     }
 }

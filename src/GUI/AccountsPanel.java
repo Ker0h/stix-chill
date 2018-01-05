@@ -1,6 +1,7 @@
 package GUI;
 
 import ActionListeners.AccountFormListener;
+import ActionListeners.DeleteAccountListener;
 import ActionListeners.UpdateAccountListener;
 import DatabaseConnections.SQLExecutor;
 import UserData.Account;
@@ -21,10 +22,10 @@ public class AccountsPanel extends JPanel {
     private String postalCode;
     private String city;
     private AccountFormListener l;
+    private DeleteAccountListener deleteAccountListener;
 
     AccountsPanel(SQLExecutor exe){
         super(new BorderLayout());
-        l = new AccountFormListener(exe, sub, name, street, houseNumber, postalCode, city);
 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Subscriber Number");
@@ -46,6 +47,9 @@ public class AccountsPanel extends JPanel {
         JButton edit = new JButton("Update account");
         JButton delete = new JButton("Delete account");
 
+        l = new AccountFormListener(exe, sub, name, street, houseNumber, postalCode, city);
+        deleteAccountListener = new DeleteAccountListener(exe, sub, this);
+
         MouseListener tableListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -58,8 +62,10 @@ public class AccountsPanel extends JPanel {
                city = (String) model.getValueAt(selectedRow, 2);
 
                 edit.removeActionListener(l);
+                delete.removeActionListener(deleteAccountListener);
 
                 l.setSub(sub);
+                deleteAccountListener.setSub(sub);
                 l.setName(name);
                 l.setStreet(street);
                 l.setHouseNumber(houseNumber);
@@ -67,6 +73,7 @@ public class AccountsPanel extends JPanel {
                 l.setCity(city);
 
                 edit.addActionListener(l);
+                delete.addActionListener(deleteAccountListener);
             }
 
             @Override

@@ -15,6 +15,30 @@ import java.util.List;
 public class SQLExecutor {
     private ResultSet resultSet = null;
 
+    public void insertAccount(String sub, String name, String street, String houseNumber, String postalCode, String city){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "INSERT INTO Account(SubscriberNumber, Name, StreetName, HouseNumber, PostalCode, City) VALUES(" + sub + ", '" + name + "', '" + street + "', '" + houseNumber + "', '" + postalCode + "', '" + city + "');";
+            dbConnector.runSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
+    public void deleteAccount(String sub){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "DELETE FROM Account WHERE SubscriberNumber ='" + sub + "';";
+            dbConnector.runSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
     public List<Account> getAccounts(){
         List<Account> accounts = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();

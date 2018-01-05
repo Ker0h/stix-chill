@@ -27,6 +27,6 @@ public class InsertAccountListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        exe.insertAccount(sub.getText(), name.getText(), street.getText(), houseNumber.getText(), postalCode.getText(), city.getText());
     }
 }
