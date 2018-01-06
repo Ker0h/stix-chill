@@ -27,6 +27,18 @@ public class SQLExecutor {
         }
     }
 
+    public void updateAccount(String oldSub, String sub, String name, String street, String houseNumber, String postalCode, String city){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "UPDATE Account SET SubscriberNumber =" + sub + ", Name ='" + name + "', StreetName ='" + street + "', HouseNumber ='" + houseNumber + "', PostalCode ='" + postalCode + "', City ='" + city + "' WHERE SubscriberNumber =" + oldSub + ";";
+            dbConnector.runSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
     public void deleteAccount(String sub){
         DBConnector dbConnector = new DBConnector();
         try {

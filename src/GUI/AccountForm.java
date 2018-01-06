@@ -88,7 +88,7 @@ public class AccountForm implements Runnable{
             houseNumberField.setText(houseNumber);
             postalField.setText(postalCode);
             cityField.setText(city);
-            submit.addActionListener(new UpdateAccountListener(exe, subField, nameField, streetField, houseNumberField, postalField, cityField));
+            submit.addActionListener(new UpdateAccountListener(exe, model, sub, subField, nameField, streetField, houseNumberField, postalField, cityField));
         }
 
         panel.add(subLabel);
