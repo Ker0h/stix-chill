@@ -5,11 +5,13 @@ import GUI.AccountForm;
 import UserData.Account;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AccountFormListener implements ActionListener {
     private SQLExecutor exe;
+    private DefaultTableModel model;
     private String sub;
     private String name;
     private String street;
@@ -17,12 +19,14 @@ public class AccountFormListener implements ActionListener {
     private String postalCode;
     private String city;
 
-    public AccountFormListener(SQLExecutor exe){
+    public AccountFormListener(SQLExecutor exe, DefaultTableModel model){
         this.exe = exe;
+        this.model = model;
     }
 
-    public AccountFormListener(SQLExecutor exe, String sub, String name, String street, String houseNumber, String postalCode, String city) {
+    public AccountFormListener(SQLExecutor exe, DefaultTableModel model, String sub, String name, String street, String houseNumber, String postalCode, String city) {
         this.exe = exe;
+        this.model = model;
         this.sub = sub;
         this.name = name;
         this.street = street;
@@ -57,6 +61,6 @@ public class AccountFormListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(new AccountForm(exe, e.getActionCommand(), sub, name, street, houseNumber, postalCode, city));
+        SwingUtilities.invokeLater(new AccountForm(exe, model, e.getActionCommand(), sub, name, street, houseNumber, postalCode, city));
     }
 }

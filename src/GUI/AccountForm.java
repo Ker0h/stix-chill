@@ -6,10 +6,12 @@ import DatabaseConnections.SQLExecutor;
 import UserData.Account;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class AccountForm implements Runnable{
     private JFrame frame;
+    private DefaultTableModel model;
     private SQLExecutor exe;
     private String actionCommand;
     private String sub;
@@ -19,9 +21,10 @@ public class AccountForm implements Runnable{
     private String postalCode;
     private String city;
 
-    public AccountForm(SQLExecutor exe, String actionCommand, String sub, String name, String street, String houseNumber, String postalCode, String city) {
+    public AccountForm(SQLExecutor exe, DefaultTableModel model, String actionCommand, String sub, String name, String street, String houseNumber, String postalCode, String city) {
         this.frame = new JFrame();
         this.exe = exe;
+        this.model = model;
         this.actionCommand = actionCommand;
         this.sub = sub;
         this.name = name;
@@ -76,7 +79,7 @@ public class AccountForm implements Runnable{
         JButton submit = new JButton("Save account");
         if(actionCommand.equals("Add new account")){
             frame.setTitle("Add new account");
-            submit.addActionListener(new InsertAccountListener(exe, subField, nameField, streetField, houseNumberField, postalField, cityField));
+            submit.addActionListener(new InsertAccountListener(exe, model, subField, nameField, streetField, houseNumberField, postalField, cityField));
         }else if(actionCommand.equals("Update account")){
             frame.setTitle("Update account");
             subField.setText(sub);
