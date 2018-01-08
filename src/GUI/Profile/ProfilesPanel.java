@@ -30,9 +30,16 @@ public class ProfilesPanel extends JPanel {
         }
 
         DefaultTableModel model = new DefaultTableModel();
-        JTable table = new JTable(model);
         model.addColumn("Name");
         model.addColumn("Date of birth");
+
+
+        for (int i = model.getRowCount(); i > 0; i--) {
+            model.removeRow(i - 1);
+        }
+
+        JTable table = new JTable(model);
+
         selectAccount.addActionListener(new ProfilesListener(selectAccount, table, exe));
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -42,15 +49,15 @@ public class ProfilesPanel extends JPanel {
         JButton edit = new JButton("Edit profile");
         JButton delete = new JButton("Delete profile");
 
-        l = new ProfileFormListener(exe, model, exe.getAccounts().get(selectAccount.getSelectedIndex()));
+        l = new ProfileFormListener(exe, model, selectAccount, exe.getAccounts().get(selectAccount.getSelectedIndex()));
         deleteProfileListener = new DeleteProfileListener(exe, profileName, model);
 
         MouseListener tableListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 selectedRow = table.rowAtPoint(e.getPoint());
-                profileName = (String) model.getValueAt(selectedRow , 0);
-                dateOfBirth = (String) model.getValueAt(selectedRow , 1);
+                profileName = (String) model.getValueAt(selectedRow, 0);
+                dateOfBirth = (String) model.getValueAt(selectedRow, 1);
 
                 edit.removeActionListener(l);
                 delete.removeActionListener(deleteProfileListener);

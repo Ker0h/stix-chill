@@ -12,19 +12,21 @@ import java.awt.event.ActionListener;
 public class ProfileFormListener implements ActionListener {
     private SQLExecutor exe;
     private DefaultTableModel model;
+    private JComboBox selectAccount;
     private String profileName;
     private String dateOfBirth;
     private Account account;
 
-    public ProfileFormListener(SQLExecutor exe, DefaultTableModel model, Account account){
+    public ProfileFormListener(SQLExecutor exe, DefaultTableModel model, JComboBox selectAccount, Account account){
         this.exe = exe;
         this.model = model;
         this.account = account;
     }
 
-    public ProfileFormListener(SQLExecutor exe, DefaultTableModel model, String profileName, String dateOfBirth, Account account) {
+    public ProfileFormListener(SQLExecutor exe, DefaultTableModel model, JComboBox selectAccount, String profileName, String dateOfBirth, Account account) {
         this.exe = exe;
         this.model = model;
+        this.selectAccount = selectAccount;
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
         this.account = account;
@@ -44,6 +46,6 @@ public class ProfileFormListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(new ProfileForm(exe, model, e.getActionCommand(), profileName, dateOfBirth, account));
+        SwingUtilities.invokeLater(new ProfileForm(exe, model, selectAccount, e.getActionCommand(), profileName, dateOfBirth, account));
     }
 }

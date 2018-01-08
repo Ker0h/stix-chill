@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 public class UpdateAccountListener implements ActionListener {
     private SQLExecutor exe;
     private DefaultTableModel model;
+    private  JFrame frame;
     private String oldSub;
     private JTextField sub;
     private JTextField name;
@@ -19,9 +20,10 @@ public class UpdateAccountListener implements ActionListener {
     private JTextField postalCode;
     private JTextField city;
 
-    public UpdateAccountListener(SQLExecutor exe, DefaultTableModel model, String oldSub, JTextField sub, JTextField name, JTextField street, JTextField houseNumber, JTextField postalCode, JTextField city) {
+    public UpdateAccountListener(SQLExecutor exe, DefaultTableModel model, JFrame frame, String oldSub, JTextField sub, JTextField name, JTextField street, JTextField houseNumber, JTextField postalCode, JTextField city) {
         this.exe = exe;
         this.model = model;
+        this.frame = frame;
         this.oldSub = oldSub;
         this.sub = sub;
         this.name = name;
@@ -45,5 +47,7 @@ public class UpdateAccountListener implements ActionListener {
         for (Account a : exe.getAccounts()) {
             model.addRow(new Object[]{a.getSubscriberNumber(), a.getName(), a.getCity(), a.getPostalCode(), a.getStreetName(), a.getHouseNumber()});
         }
+
+        frame.dispose();
     }
 }

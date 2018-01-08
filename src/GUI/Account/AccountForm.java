@@ -77,7 +77,7 @@ public class AccountForm implements Runnable{
         JButton submit = new JButton("Save account");
         if(actionCommand.equals("Add new account")){
             frame.setTitle("Add new account");
-            submit.addActionListener(new InsertAccountListener(exe, model, subField, nameField, streetField, houseNumberField, postalField, cityField));
+            submit.addActionListener(new InsertAccountListener(exe, model, frame, subField, nameField, streetField, houseNumberField, postalField, cityField));
         }else if(actionCommand.equals("Update account")){
             frame.setTitle("Update account");
             subField.setText(sub);
@@ -86,7 +86,7 @@ public class AccountForm implements Runnable{
             houseNumberField.setText(houseNumber);
             postalField.setText(postalCode);
             cityField.setText(city);
-            submit.addActionListener(new UpdateAccountListener(exe, model, sub, subField, nameField, streetField, houseNumberField, postalField, cityField));
+            submit.addActionListener(new UpdateAccountListener(exe, model, frame, sub, subField, nameField, streetField, houseNumberField, postalField, cityField));
         }
 
         panel.add(subLabel);

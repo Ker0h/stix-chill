@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 public class InsertAccountListener implements ActionListener {
     private SQLExecutor exe;
     private DefaultTableModel model;
+    private JFrame frame;
     private JTextField sub;
     private JTextField name;
     private JTextField street;
@@ -18,9 +19,10 @@ public class InsertAccountListener implements ActionListener {
     private JTextField postalCode;
     private JTextField city;
 
-    public InsertAccountListener(SQLExecutor exe, DefaultTableModel model, JTextField sub, JTextField name, JTextField street, JTextField houseNumber, JTextField postalCode, JTextField city) {
+    public InsertAccountListener(SQLExecutor exe, DefaultTableModel model, JFrame frame, JTextField sub, JTextField name, JTextField street, JTextField houseNumber, JTextField postalCode, JTextField city) {
         this.exe = exe;
         this.model = model;
+        this.frame = frame;
         this.sub = sub;
         this.name = name;
         this.street = street;
@@ -40,5 +42,7 @@ public class InsertAccountListener implements ActionListener {
         for (Account a : exe.getAccounts()) {
             model.addRow(new Object[]{a.getSubscriberNumber(), a.getName(), a.getCity(), a.getPostalCode(), a.getStreetName(), a.getHouseNumber()});
         }
+
+        frame.dispose();
     }
 }
