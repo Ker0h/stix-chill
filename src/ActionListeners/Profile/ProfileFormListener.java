@@ -44,6 +44,6 @@ public class ProfileFormListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(new ProfileForm(exe, model, profileName, dateOfBirth, account));
+        SwingUtilities.invokeLater(new ProfileForm(exe, model, e.getActionCommand(), profileName, dateOfBirth, account));
     }
 }

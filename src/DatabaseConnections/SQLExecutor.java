@@ -68,7 +68,6 @@ public class SQLExecutor {
 
                 Account acc = new Account(subNo,name,streetName,houseNumber,postalCode,city);
                 accounts.add(acc);
-                // System.out.println(acc.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,6 +104,18 @@ public class SQLExecutor {
             }
         }
         return accounts;
+    }
+
+    public void insertProfile(String profileName, String dateOfBirth, Account account){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "INSERT INTO Profile(SubscriberNumber, ProfileName, DateOfBirth) VALUES(" + account.getSubscriberNumber() + ", '" + profileName + "', '" + dateOfBirth + "');";
+            dbConnector.runSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
     }
 
     public List<Profile> getProfiles(Account account){
