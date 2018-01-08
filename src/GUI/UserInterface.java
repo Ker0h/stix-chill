@@ -1,6 +1,10 @@
 package GUI;
 
 import DatabaseConnections.SQLExecutor;
+import GUI.Account.AccountsPanel;
+import GUI.Profile.ProfilesPanel;
+import GUI.Statistics.*;
+import GUI.Watched.WatchedPanel;
 
 import javax.swing.*;
 import java.awt.*;
