@@ -19,7 +19,7 @@ public class SQLExecutor {
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "INSERT INTO Account(SubscriberNumber, Name, StreetName, HouseNumber, PostalCode, City) VALUES(" + sub + ", '" + name + "', '" + street + "', '" + houseNumber + "', '" + postalCode + "', '" + city + "');";
-            dbConnector.runSQL(SQL);
+            dbConnector.crudSQL(SQL);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -31,7 +31,7 @@ public class SQLExecutor {
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "UPDATE Account SET SubscriberNumber =" + sub + ", Name ='" + name + "', StreetName ='" + street + "', HouseNumber ='" + houseNumber + "', PostalCode ='" + postalCode + "', City ='" + city + "' WHERE SubscriberNumber =" + oldSub + ";";
-            dbConnector.runSQL(SQL);
+            dbConnector.crudSQL(SQL);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -43,7 +43,7 @@ public class SQLExecutor {
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "DELETE FROM Account WHERE SubscriberNumber ='" + sub + "';";
-            dbConnector.runSQL(SQL);
+            dbConnector.crudSQL(SQL);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -110,7 +110,7 @@ public class SQLExecutor {
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "INSERT INTO Profile(SubscriberNumber, ProfileName, DateOfBirth) VALUES(" + account.getSubscriberNumber() + ", '" + profileName + "', '" + dateOfBirth + "');";
-            dbConnector.runSQL(SQL);
+            dbConnector.crudSQL(SQL);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

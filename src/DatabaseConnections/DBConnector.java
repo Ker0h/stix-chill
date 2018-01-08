@@ -24,6 +24,11 @@ public class DBConnector {
         return stmt.executeQuery(sql);
     }
 
+    protected void crudSQL(String sql) throws SQLException {
+        Statement stmt = con.createStatement();
+        stmt.execute(sql);
+    }
+
     protected void closeConnection(){
         if (con != null) try { con.close(); } catch(Exception e) {e.printStackTrace();}
     }
