@@ -21,23 +21,14 @@ public class WatchedPanel extends JPanel {
         for(Account a:accounts){
             selectAccount.addItem(new ComboModel(a.getName(), a));
         }
-
-        JComboBox selectProfile = new JComboBox();
-        List<Profile> profiles = exe.getProfiles(accounts.get(selectAccount.getSelectedIndex()));
-        for(Profile p:profiles){
-            selectProfile.addItem(new ComboModel(p.getProfileName(), p));
-        }
-
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Profile");
-        model.addColumn("Title");
-        model.addColumn("Percentage");
-
-        selectAccount.addActionListener(new WatchedSelectAccountListener(selectAccount, selectProfile));
-        selectProfile.addActionListener(new WatchedListener(selectProfile, model, exe, profiles));
-
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
+
+        JComboBox selectProfile = new JComboBox();
+
+        selectAccount.addActionListener(new WatchedSelectAccountListener(selectAccount, selectProfile, accounts, exe));
+        selectProfile.addActionListener(new WatchedListener(selectProfile, table, exe, selectAccount));
 
         JPanel comboBoxPanel = new JPanel(new BorderLayout());
         comboBoxPanel.add(selectAccount, BorderLayout.WEST);

@@ -29,9 +29,6 @@ public class DBConnector {
         stmt.execute(sql);
     }
 
-    protected void closeConnection(){
-        if (con != null) try { con.close(); } catch(Exception e) {e.printStackTrace();}
-    }
 
     protected static Connection getCon() {
         return con;
@@ -40,7 +37,7 @@ public class DBConnector {
     @Override
     protected void finalize() throws Throwable {
         try {
-            con.close();
+            //con.close();
         } finally {
             super.finalize();
         }
