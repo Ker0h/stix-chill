@@ -1,5 +1,6 @@
 package GUI.Watched;
 
+import ActionListeners.Watched.WatchedFormListener;
 import ActionListeners.Watched.WatchedListener;
 import ActionListeners.Watched.WatchedSelectAccountListener;
 import DatabaseConnections.SQLExecutor;
@@ -34,7 +35,17 @@ public class WatchedPanel extends JPanel {
         comboBoxPanel.add(selectAccount, BorderLayout.WEST);
         comboBoxPanel.add(selectProfile, BorderLayout.EAST);
 
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JButton add = new JButton("Add a new Watched");
+        JButton edit = new JButton("Edit watched");
+        JButton delete = new JButton("Delete watched");
+        add.addActionListener(new WatchedFormListener(exe));
+        buttonPanel.add(add);
+        buttonPanel.add(edit);
+        buttonPanel.add(delete);
+
         this.add(comboBoxPanel, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
+        this.add(buttonPanel, BorderLayout.SOUTH);
     }
 }
