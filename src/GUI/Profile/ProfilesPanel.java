@@ -23,41 +23,30 @@ public class ProfilesPanel extends JPanel {
 
     public ProfilesPanel(SQLExecutor exe){
         super(new BorderLayout());
+        List<Account> accounts = exe.getAccounts();
 
         JComboBox selectAccount = new JComboBox();
         for(Account a:exe.getAccounts()){
             selectAccount.addItem(new ComboModel(a.getName(), a));
         }
 
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Name");
-        model.addColumn("Date of birth");
+        JTable table = new JTable();
 
-
-        for (int i = model.getRowCount(); i > 0; i--) {
-            model.removeRow(i - 1);
-        }
-
-        JTable table = new JTable(model);
-
-        selectAccount.addActionListener(new ProfilesListener(selectAccount, table, exe));
-
-        JScrollPane scrollPane = new JScrollPane(table);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton addProfileButton = new JButton("Add new profile");
         JButton edit = new JButton("Edit profile");
         JButton delete = new JButton("Delete profile");
 
-        l = new ProfileFormListener(exe, model, selectAccount, exe.getAccounts().get(selectAccount.getSelectedIndex()));
-        deleteProfileListener = new DeleteProfileListener(exe, profileName, model);
+        l = new ProfileFormListener(exe, (DefaultTableModel) table.getModel(), profileName, dateOfBirth, accounts.get(selectAccount.getSelectedIndex()));
+        deleteProfileListener = new DeleteProfileListener(exe, selectAccount, profileName);
 
         MouseListener tableListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 selectedRow = table.rowAtPoint(e.getPoint());
-                profileName = (String) model.getValueAt(selectedRow, 0);
-                dateOfBirth = (String) model.getValueAt(selectedRow, 1);
+                profileName = (String) table.getModel().getValueAt(selectedRow, 0);
+                dateOfBirth = (String) table.getModel().getValueAt(selectedRow, 1);
 
                 edit.removeActionListener(l);
                 delete.removeActionListener(deleteProfileListener);
@@ -65,6 +54,7 @@ public class ProfilesPanel extends JPanel {
                 l.setProfileName(profileName);
                 deleteProfileListener.setProfileName(profileName);
                 l.setDateOfBirth(dateOfBirth);
+                l.setAccount(accounts.get(selectAccount.getSelectedIndex()));
 
                 edit.addActionListener(l);
                 delete.addActionListener(deleteProfileListener);
@@ -92,7 +82,9 @@ public class ProfilesPanel extends JPanel {
         };
         table.addMouseListener(tableListener);
 
-        addProfileButton.addActionListener(l);
+        selectAccount.addActionListener(new ProfilesListener(selectAccount, table, exe, addProfileButton, accounts));
+
+        JScrollPane scrollPane = new JScrollPane(table);
 
         buttonPanel.add(addProfileButton);
         buttonPanel.add(edit);

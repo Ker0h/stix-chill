@@ -12,41 +12,24 @@ import java.util.List;
 
 public class ProfilesListener implements ActionListener {
     private JComboBox selectAccount;
-    private JTable t;
+    private JTable table;
     private SQLExecutor exe;
+    private JButton button;
+    private List<Account> accounts;
 
-    public ProfilesListener(JComboBox selectAccount, JTable t, SQLExecutor exe){
+    public ProfilesListener(JComboBox selectAccount, JTable table, SQLExecutor exe, JButton button, List<Account> accounts){
         this.selectAccount = selectAccount;
-        this.t = t;
         this.exe = exe;
-
-        selectAccount.setSelectedIndex(0);
-
-        List<Account> accounts = exe.getAccounts();
-        Account selectedAccount = accounts.get(selectAccount.getSelectedIndex());
-
-        System.out.println(selectedAccount.toString());
-        DefaultTableModel model = new DefaultTableModel();
-
-        model.addColumn("Name");
-        model.addColumn("Date of birth");
-
-        for (int i = model.getRowCount(); i > 0; i--) {
-            model.removeRow(i - 1);
-        }
-
-        for(Object o:exe.getProfiles(selectedAccount)){
-            Profile p = (Profile) o;
-            model.addRow(new Object[]{p.getProfileName(), p.getDateOfBirth()});
-        }
+        this.table = table;
+        this.button = button;
+        this.accounts = accounts;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        List<Account> accounts = exe.getAccounts();
         Account selectedAccount = accounts.get(selectAccount.getSelectedIndex());
         DefaultTableModel model = new DefaultTableModel();
+        ProfileFormListener l = new ProfileFormListener(exe, model, selectedAccount);
 
         model.addColumn("Name");
         model.addColumn("Date of birth");
@@ -59,6 +42,8 @@ public class ProfilesListener implements ActionListener {
             Profile p = (Profile) o;
             model.addRow(new Object[]{p.getProfileName(), p.getDateOfBirth()});
         }
-        t.setModel(model);
+
+        table.setModel(model);
+        button.addActionListener(l);
     }
 }

@@ -106,10 +106,22 @@ public class SQLExecutor {
         return accounts;
     }
 
-    public void insertProfile(String profileName, String dateOfBirth, Account account){
+    public void insertProfile(String profileName, String dateOfBirth, String subscriberNumber){
         DBConnector dbConnector = new DBConnector();
         try {
-            String SQL = "INSERT INTO Profile(SubscriberNumber, ProfileName, DateOfBirth) VALUES(" + account.getSubscriberNumber() + ", '" + profileName + "', '" + dateOfBirth + "');";
+            String SQL = "INSERT INTO Profile(SubscriberNumber, ProfileName, DateOfBirth) VALUES(" + subscriberNumber + ", '" + profileName + "', '" + dateOfBirth + "');";
+            dbConnector.crudSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
+    public void deleteProfile(String profileName){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "DELETE FROM Profile WHERE ProfileName = '" + profileName + "';";
             dbConnector.crudSQL(SQL);
         } catch (Exception e) {
             e.printStackTrace();

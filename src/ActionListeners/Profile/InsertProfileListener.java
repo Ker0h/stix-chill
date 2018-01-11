@@ -13,16 +13,14 @@ public class InsertProfileListener implements ActionListener {
     private SQLExecutor exe;
     private DefaultTableModel model;
     private JFrame frame;
-    private JComboBox selectAccount;
     private JTextField profileName;
     private JTextField dateOfBirth;
     private Account account;
 
-    public InsertProfileListener(SQLExecutor exe, DefaultTableModel model, JFrame frame, JComboBox selectAccount, JTextField profileName, JTextField dateOfBirth, Account account) {
+    public InsertProfileListener(SQLExecutor exe, DefaultTableModel model, JFrame frame, JTextField profileName, JTextField dateOfBirth, Account account) {
         this.exe = exe;
         this.model = model;
         this.frame = frame;
-        this.selectAccount = selectAccount;
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
         this.account = account;
@@ -31,9 +29,11 @@ public class InsertProfileListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(dateOfBirth.getText().matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")){
-            exe.insertProfile(profileName.getText(), dateOfBirth.getText(), account);
-
-            selectAccount.setSelectedIndex(exe.getAccounts().indexOf(account));
+            try {
+                exe.insertProfile(profileName.getText(), dateOfBirth.getText(), account.getSubscriberNumber());
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(frame, ex.getMessage());
+            }
 
             for (int i = model.getRowCount(); i > 0; i--) {
                 model.removeRow(i - 1);

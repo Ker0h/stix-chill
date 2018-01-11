@@ -13,16 +13,14 @@ public class ProfileForm implements Runnable {
     private JFrame frame;
     private DefaultTableModel model;
     private SQLExecutor exe;
-    private JComboBox selectAccount;
     private String actionCommand;
     private String profileName;
     private String dateOfBirth;
     private Account account;
 
-    public ProfileForm(SQLExecutor exe, DefaultTableModel model, JComboBox selectAccount, String actionCommand, String profileName, String dateOfBirth, Account account) {
+    public ProfileForm(SQLExecutor exe, DefaultTableModel model, String actionCommand, String profileName, String dateOfBirth, Account account) {
         this.model = model;
         this.exe = exe;
-        this.selectAccount = selectAccount;
         this.actionCommand = actionCommand;
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
@@ -57,9 +55,10 @@ public class ProfileForm implements Runnable {
 
 
         JButton submit = new JButton("Save profile");
+
         if(actionCommand.equals("Add new profile")){
             frame.setTitle("Add new profile");
-            submit.addActionListener(new InsertProfileListener(exe, model, frame, selectAccount, nameField, dateOfBirthField, account));
+            submit.addActionListener(new InsertProfileListener(exe, model, frame, nameField, dateOfBirthField, account));
         }else if(actionCommand.equals("Update profile")){
             frame.setTitle("Update profile");
             nameField.setText(profileName);
