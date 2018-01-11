@@ -8,6 +8,7 @@ import Watchables.Film;
 import Watchables.Programme;
 import Watchables.Series;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,18 @@ public class SQLExecutor {
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "INSERT INTO Profile(SubscriberNumber, ProfileName, DateOfBirth) VALUES(" + subscriberNumber + ", '" + profileName + "', '" + dateOfBirth + "');";
+            dbConnector.crudSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
+    public void updateProfile(String profileName, JTextField nameField, JTextField dateField){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "UPDATE Profile SET ProfileName = '" + nameField.getText() + "', DateOfBirth = '" + dateField.getText() + "' WHERE ProfileName = '" + profileName + "';";
             dbConnector.crudSQL(SQL);
         } catch (Exception e) {
             e.printStackTrace();

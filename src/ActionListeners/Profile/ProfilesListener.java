@@ -29,7 +29,7 @@ public class ProfilesListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Account selectedAccount = accounts.get(selectAccount.getSelectedIndex());
         DefaultTableModel model = new DefaultTableModel();
-        ProfileFormListener l = new ProfileFormListener(exe, model, selectedAccount);
+        ProfileFormListener l = new ProfileFormListener(exe, model, selectAccount, selectedAccount);
 
         model.addColumn("Name");
         model.addColumn("Date of birth");

@@ -12,15 +12,17 @@ import java.awt.*;
 public class ProfileForm implements Runnable {
     private JFrame frame;
     private DefaultTableModel model;
+    private JComboBox comboBox;
     private SQLExecutor exe;
     private String actionCommand;
     private String profileName;
     private String dateOfBirth;
     private Account account;
 
-    public ProfileForm(SQLExecutor exe, DefaultTableModel model, String actionCommand, String profileName, String dateOfBirth, Account account) {
+    public ProfileForm(SQLExecutor exe, DefaultTableModel model, JComboBox comboBox, String actionCommand, String profileName, String dateOfBirth, Account account) {
         this.model = model;
         this.exe = exe;
+        this.comboBox = comboBox;
         this.actionCommand = actionCommand;
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
@@ -59,11 +61,11 @@ public class ProfileForm implements Runnable {
         if(actionCommand.equals("Add new profile")){
             frame.setTitle("Add new profile");
             submit.addActionListener(new InsertProfileListener(exe, model, frame, nameField, dateOfBirthField, account));
-        }else if(actionCommand.equals("Update profile")){
-            frame.setTitle("Update profile");
+        }else if(actionCommand.equals("Edit profile")){
+            frame.setTitle("Edit profile");
             nameField.setText(profileName);
             dateOfBirthField.setText(dateOfBirth);
-            //submit.addActionListener(new UpdateProfileListener(exe, model, frame, profileName, nameField, dateOfBirthField, account));
+            submit.addActionListener(new UpdateProfileListener(exe, model, comboBox, frame, profileName, nameField, dateOfBirthField, account));
         }
 
         panel.add(nameLabel);

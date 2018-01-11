@@ -38,7 +38,7 @@ public class ProfilesPanel extends JPanel {
         JButton edit = new JButton("Edit profile");
         JButton delete = new JButton("Delete profile");
 
-        l = new ProfileFormListener(exe, (DefaultTableModel) table.getModel(), profileName, dateOfBirth, accounts.get(selectAccount.getSelectedIndex()));
+        l = new ProfileFormListener(exe, (DefaultTableModel) table.getModel(), selectAccount, profileName, dateOfBirth, accounts.get(selectAccount.getSelectedIndex()));
         deleteProfileListener = new DeleteProfileListener(exe, selectAccount, profileName);
 
         MouseListener tableListener = new MouseListener() {
