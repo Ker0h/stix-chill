@@ -2,6 +2,7 @@ package DatabaseConnections;
 
 import GUI.ComboBoxUpdater;
 import GUI.ComboModel;
+import GUI.SingleProfileTableUpdater;
 import UserData.Account;
 import UserData.Profile;
 import UserData.Watched;
@@ -59,18 +60,6 @@ public class SQLExecutor {
         }
 
         ComboBoxUpdater.updateAccountBoxes(getAccounts());
-    }
-
-    public void insertWatched(String profileName, int programmeId, int percentage){
-        DBConnector dbConnector = new DBConnector();
-        try {
-            String SQL = "INSERT INTO Watched VALUES('" +  profileName + "', " + programmeId + ", " + percentage +");";
-            dbConnector.crudSQL(SQL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
-        }
     }
 
     public List<Account> getAccounts(){
@@ -171,6 +160,8 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+
+        SingleProfileTableUpdater.updateSingleProfileModel(getAccountsWithSingleProfile());
     }
 
     public void updateProfile(String profileName, JTextField nameField, JTextField dateField){
@@ -195,6 +186,8 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+
+        SingleProfileTableUpdater.updateSingleProfileModel(getAccountsWithSingleProfile());
     }
 
     public List<Profile> getProfiles(Account account){
@@ -223,6 +216,18 @@ public class SQLExecutor {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
         return profiles;
+    }
+
+    public void insertWatched(String profileName, int programmeId, int percentage){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "INSERT INTO Watched VALUES('" +  profileName + "', " + programmeId + ", " + percentage +");";
+            dbConnector.crudSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
     }
 
     public List<Series> getSeries(){
