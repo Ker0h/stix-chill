@@ -68,7 +68,7 @@ public class WatchedPanel extends JPanel {
                 editListener.setEpisodeName(episodeName);
                 editListener.setPercentage(percentage);
                 editListener.setProfileName(profileName);
-                
+
                 edit.addActionListener(editListener);
             }
 
