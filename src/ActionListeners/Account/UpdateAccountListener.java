@@ -33,8 +33,7 @@ public class UpdateAccountListener implements ActionListener {
         this.city = city;
     }
 
-
-
+    //Updates selected account, refreshes the DefaultTableModel and disposes of the FormPanel
     @Override
     public void actionPerformed(ActionEvent e) {
         exe.updateAccount(oldSub, sub.getText(), name.getText(), street.getText(), houseNumber.getText(), postalCode.getText(), city.getText());

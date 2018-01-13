@@ -58,6 +58,7 @@ public class AccountFormListener implements ActionListener {
         this.city = city;
     }
 
+    //Invokes a new FormPanel with all data of a possibly selected account
     @Override
     public void actionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new AccountForm(exe, model, e.getActionCommand(), sub, name, street, houseNumber, postalCode, city));
