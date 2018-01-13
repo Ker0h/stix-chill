@@ -12,12 +12,16 @@ public class WatchedEditForm implements Runnable {
     private String programmeName;
     private int percentage;
     private String profileName;
+    private JComboBox combo;
+    private JComboBox combo2;
 
-    public WatchedEditForm(SQLExecutor exe, String programmeName, int percentage, String profileName) {
+    public WatchedEditForm(SQLExecutor exe, String programmeName, int percentage, String profileName, JComboBox combo, JComboBox combo2) {
         this.exe = exe;
         this.programmeName = programmeName;
         this.percentage = percentage;
         this.profileName = profileName;
+        this.combo = combo;
+        this.combo2 = combo2;
     }
 
     @Override
@@ -44,7 +48,7 @@ public class WatchedEditForm implements Runnable {
 
         JPanel buttonPanel = new JPanel();
         JButton editButton = new JButton("Update");
-        editButton.addActionListener(new EditWatchedListener(exe, frame, profileName, programmeName, percentageField));
+        editButton.addActionListener(new EditWatchedListener(exe, frame, profileName, programmeName, percentageField, combo, combo2));
         buttonPanel.add(editButton);
 
         panel.add(label);

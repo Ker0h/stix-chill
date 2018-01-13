@@ -17,13 +17,19 @@ public class EditWatchedListener implements ActionListener {
     private String profileName;
     private String programmeName;
     private JTextField percentage;
+    private JComboBox combo;
+    private JComboBox combo2;
 
-    public EditWatchedListener(SQLExecutor exe, JFrame frame, String profileName, String programmeName, JTextField percentage) {
+
+    public EditWatchedListener(SQLExecutor exe, JFrame frame, String profileName, String programmeName, JTextField percentage, JComboBox combo, JComboBox combo2) {
         this.exe = exe;
         this.frame = frame;
         this.profileName = profileName;
         this.programmeName = programmeName;
         this.percentage = percentage;
+        this.combo = combo;
+        this.combo2 = combo2;
+
     }
 
     @Override
@@ -41,15 +47,22 @@ public class EditWatchedListener implements ActionListener {
                     if(epi.getTitle().equals(programme)){
                         exe.editWatched(profileName, epi.getProgrammeID(), Integer.parseInt(percentage.getText()));
                         JOptionPane.showMessageDialog(frame,profileName + " has now watched " + programmeName + " for " + percentage.getText() + "%!");
+                        combo.setSelectedItem(combo.getSelectedItem());
+                        int y = combo2.getSelectedIndex();
+                        combo2.setSelectedIndex(y);
                         frame.dispose();
+
                     }
                 }
             }else{
                 List<Film> films = exe.getFilms();
                 for(Film film : films){
-                    if(film.getTitle().equals(profileName)){
+                    if(film.getTitle().equals(programmeName)){
                         exe.editWatched(profileName, film.getProgrammeID(), Integer.parseInt(percentage.getText()));
                         JOptionPane.showMessageDialog(frame,profileName + " has now watched " + programmeName + " for " + percentage.getText() + "%!");
+                        int x = combo2.getSelectedIndex();
+                        combo.setSelectedItem(combo.getSelectedItem());
+                        combo2.setSelectedIndex(x);
                         frame.dispose();
                     }
                 }
