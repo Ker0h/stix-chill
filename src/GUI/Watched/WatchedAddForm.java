@@ -13,11 +13,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WatchedForm implements Runnable {
+public class WatchedAddForm implements Runnable {
     private JFrame frame;
     private SQLExecutor exe;
 
-    public WatchedForm(SQLExecutor exe) {
+    public WatchedAddForm(SQLExecutor exe) {
         this.exe = exe;
     }
 

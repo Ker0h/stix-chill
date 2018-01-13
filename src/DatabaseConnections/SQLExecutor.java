@@ -73,6 +73,18 @@ public class SQLExecutor {
         }
     }
 
+    public void EditWatched(String profileName, int programmeId, int percentage){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "UPDATE Watched SET Percentage =" + percentage + " WHERE ProfileName = '" + profileName + "' AND ProgrameID = " + programmeId + ";";
+            dbConnector.crudSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
     public List<Account> getAccounts(){
         List<Account> accounts = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();

@@ -1,6 +1,7 @@
 package GUI.Watched;
 
-import ActionListeners.Watched.WatchedFormListener;
+import ActionListeners.Watched.AddWatchedFormListener;
+import ActionListeners.Watched.EditWatchedFormListener;
 import ActionListeners.Watched.WatchedListener;
 import ActionListeners.Watched.WatchedSelectAccountListener;
 import DatabaseConnections.SQLExecutor;
@@ -11,9 +12,16 @@ import UserData.Account;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 public class WatchedPanel extends JPanel {
+    private int percentage;
+    private String profileName;
+    private String episodeName;
+    private EditWatchedFormListener editListener;
+
     public WatchedPanel(SQLExecutor exe){
         super(new BorderLayout());
 
@@ -41,7 +49,52 @@ public class WatchedPanel extends JPanel {
         JButton add = new JButton("Add a new Watched");
         JButton edit = new JButton("Edit watched");
         JButton delete = new JButton("Delete watched");
-        add.addActionListener(new WatchedFormListener(exe));
+        add.addActionListener(new AddWatchedFormListener(exe));
+
+        editListener = new EditWatchedFormListener(exe, episodeName, percentage, profileName);
+
+        MouseListener tableListener = new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedRow = table.rowAtPoint(e.getPoint());
+                episodeName = (String) table.getValueAt(selectedRow,0);
+                percentage = (int) table.getValueAt(selectedRow,1);
+                Object profile = selectProfile.getSelectedItem();
+                profileName = profile.toString();
+
+                edit.removeActionListener(editListener);
+
+                editListener.setEpisodeName(episodeName);
+                editListener.setPercentage(percentage);
+                editListener.setProfileName(profileName);
+                
+                edit.addActionListener(editListener);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        };
+
+        table.addMouseListener(tableListener);
+
         buttonPanel.add(add);
         buttonPanel.add(edit);
         buttonPanel.add(delete);
