@@ -63,14 +63,12 @@ public class InsertWatchedListener implements ActionListener {
                     }
                 }
                 if(!exists){
-                    System.out.println("WIP Insert" + selectedProfileName + " and " + selectedProgrammeId + " and " + selectedPercentage);
                     exe.insertWatched(selectedProfileName, selectedProgrammeId, selectedPercentage);
                     JOptionPane.showMessageDialog(frame,selectedProfileName + " has seen " + selectedPercentage + "% of " + selectedProgrammeName);
                     frame.dispose();
                 }
             }
         }else{
-            System.out.println("not a number or not between 1 and 100!");
             JOptionPane.showMessageDialog(frame,"Percentage is not a number or not between 1 and 100!" );
         }
     }
