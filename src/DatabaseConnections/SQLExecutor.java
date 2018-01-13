@@ -74,7 +74,7 @@ public class SQLExecutor {
         }
     }
 
-    public void EditWatched(String profileName, int programmeId, int percentage){
+    public void editWatched(String profileName, int programmeId, int percentage){
         DBConnector dbConnector = new DBConnector();
         try {
             String SQL = "UPDATE Watched SET Percentage =" + percentage + " WHERE ProfileName = '" + profileName + "' AND ProgrameID = " + programmeId + ";";

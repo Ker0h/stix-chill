@@ -39,7 +39,7 @@ public class EditWatchedListener implements ActionListener {
                 }
                 for(Episode epi : episodes){
                     if(epi.getTitle().equals(programme)){
-                        exe.EditWatched(profileName, epi.getProgrammeID(), Integer.parseInt(percentage.getText()));
+                        exe.editWatched(profileName, epi.getProgrammeID(), Integer.parseInt(percentage.getText()));
                         JOptionPane.showMessageDialog(frame,profileName + " has now watched " + programmeName + " for " + percentage.getText() + "%!");
                         frame.dispose();
                     }
@@ -48,7 +48,7 @@ public class EditWatchedListener implements ActionListener {
                 List<Film> films = exe.getFilms();
                 for(Film film : films){
                     if(film.getTitle().equals(profileName)){
-                        exe.EditWatched(profileName, film.getProgrammeID(), Integer.parseInt(percentage.getText()));
+                        exe.editWatched(profileName, film.getProgrammeID(), Integer.parseInt(percentage.getText()));
                         JOptionPane.showMessageDialog(frame,profileName + " has now watched " + programmeName + " for " + percentage.getText() + "%!");
                         frame.dispose();
                     }

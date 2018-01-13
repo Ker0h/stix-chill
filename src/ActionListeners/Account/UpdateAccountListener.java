@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class UpdateAccountListener implements ActionListener {
     private SQLExecutor exe;
     private DefaultTableModel model;
-    private  JFrame frame;
+    private JFrame frame;
     private String oldSub;
     private JTextField sub;
     private JTextField name;
