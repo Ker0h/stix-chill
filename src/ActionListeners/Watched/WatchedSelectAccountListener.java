@@ -27,7 +27,11 @@ public class WatchedSelectAccountListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Account acc = accounts.get(selectAccount.getSelectedIndex());
+        int selectedIndex = selectAccount.getSelectedIndex();
+        if(selectedIndex < 0){
+            selectedIndex += 1;
+        }
+        Account acc = accounts.get(selectedIndex);
 
         ArrayList<Profile> prof = (ArrayList<Profile>) exe.getProfiles(acc);
         selectProfile.removeAllItems();

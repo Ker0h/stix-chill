@@ -56,6 +56,5 @@ SeriesPercentageWatchedListener implements ActionListener {
 
         //update the table you already made with the new model
         t.setModel(model);
-
     }
 }

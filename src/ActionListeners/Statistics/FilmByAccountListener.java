@@ -28,7 +28,13 @@ public class FilmByAccountListener implements ActionListener {
         //get the accounts, films, profiles and watched data from the database.
         SQLExecutor sql = new SQLExecutor();
         ArrayList<Account> ac = (ArrayList<Account>) sql.getAccounts();
-        Account acc = ac.get(c.getSelectedIndex());
+
+        int selectedIndex = c.getSelectedIndex();
+        if(selectedIndex < 0){
+            selectedIndex += 1;
+        }
+        Account acc = ac.get(selectedIndex);
+
         ArrayList<Film> fi = (ArrayList<Film>) sql.getFilms();
         ArrayList<Profile> pr = (ArrayList<Profile>) sql.getProfiles(acc);
         ArrayList<List<Watched>> wa = new ArrayList<>();
@@ -36,13 +42,13 @@ public class FilmByAccountListener implements ActionListener {
         //Make 1 new arraylist for the end result.
         ArrayList<String> filmNames = new ArrayList<>();
 
-        for(Profile pro : pr){
-            wa.add( sql.getWatched(pro));
+        for (Profile pro : pr) {
+            wa.add(sql.getWatched(pro));
         }
 
-        for(Film fil : fi){
-            for (List wat :  wa){
-                for(Object watch :  wat) {
+        for (Film fil : fi) {
+            for (List wat : wa) {
+                for (Object watch : wat) {
                     Watched watche = (Watched) watch;
                     if (fil.getProgrammeID() == watche.GetProgrammeID()) {
                         filmNames.add(fil.getTitle());
@@ -57,12 +63,11 @@ public class FilmByAccountListener implements ActionListener {
 
         // add the rows with episode names and percentage watched
         int i = 0;
-        for(i =0; i < filmNames.size(); i++){
+        for (i = 0; i < filmNames.size(); i++) {
             model.addRow(new Object[]{filmNames.get(i)});
         }
 
         //update the table you already made with the new model
         t.setModel(model);
-
     }
 }

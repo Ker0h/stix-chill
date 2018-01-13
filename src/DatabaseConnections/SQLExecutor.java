@@ -1,5 +1,7 @@
 package DatabaseConnections;
 
+import GUI.ComboBoxUpdater;
+import GUI.ComboModel;
 import UserData.Account;
 import UserData.Profile;
 import UserData.Watched;
@@ -16,6 +18,7 @@ import java.util.List;
 public class SQLExecutor {
     private ResultSet resultSet = null;
 
+
     public void insertAccount(String sub, String name, String street, String houseNumber, String postalCode, String city){
         DBConnector dbConnector = new DBConnector();
         try {
@@ -26,6 +29,8 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+
+        ComboBoxUpdater.updateAccountBoxes(getAccounts());
     }
 
     public void updateAccount(String oldSub, String sub, String name, String street, String houseNumber, String postalCode, String city){
@@ -38,6 +43,8 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+
+        ComboBoxUpdater.updateAccountBoxes(getAccounts());
     }
 
     public void deleteAccount(String sub){
@@ -50,6 +57,8 @@ public class SQLExecutor {
         } finally {
             if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
         }
+
+        ComboBoxUpdater.updateAccountBoxes(getAccounts());
     }
 
     public void insertWatched(String profileName, int programmeId, int percentage){

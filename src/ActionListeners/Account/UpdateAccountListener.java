@@ -37,7 +37,6 @@ public class UpdateAccountListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Subs " + oldSub + "    " + sub.getText());
         exe.updateAccount(oldSub, sub.getText(), name.getText(), street.getText(), houseNumber.getText(), postalCode.getText(), city.getText());
 
         for (int i = model.getRowCount(); i > 0; i--) {

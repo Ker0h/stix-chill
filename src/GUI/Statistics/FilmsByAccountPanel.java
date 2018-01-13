@@ -2,6 +2,7 @@ package GUI.Statistics;
 
 import ActionListeners.Statistics.FilmByAccountListener;
 import DatabaseConnections.SQLExecutor;
+import GUI.ComboBoxUpdater;
 import GUI.ComboModel;
 import UserData.Account;
 
@@ -20,6 +21,8 @@ public class FilmsByAccountPanel extends JPanel {
         for(Account acc : exe.getAccounts()){
             c.addItem(new ComboModel(acc.getName(), acc));
         }
+        ComboBoxUpdater.addAccountBox(c);
+
         c.addActionListener(new FilmByAccountListener(table, c));
 
         JScrollPane tableContainer = new JScrollPane(table);

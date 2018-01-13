@@ -4,6 +4,7 @@ import ActionListeners.Profile.DeleteProfileListener;
 import ActionListeners.Profile.ProfileFormListener;
 import ActionListeners.Profile.ProfilesListener;
 import DatabaseConnections.SQLExecutor;
+import GUI.ComboBoxUpdater;
 import GUI.ComboModel;
 import UserData.Account;
 
@@ -29,6 +30,7 @@ public class ProfilesPanel extends JPanel {
         for(Account a:exe.getAccounts()){
             selectAccount.addItem(new ComboModel(a.getName(), a));
         }
+        ComboBoxUpdater.addAccountBox(selectAccount);
 
         JTable table = new JTable();
 

@@ -27,23 +27,25 @@ public class ProfilesListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Account selectedAccount = accounts.get(selectAccount.getSelectedIndex());
-        DefaultTableModel model = new DefaultTableModel();
-        ProfileFormListener l = new ProfileFormListener(exe, model, selectAccount, selectedAccount);
+        try {
+            Account selectedAccount = accounts.get(selectAccount.getSelectedIndex());
+            DefaultTableModel model = new DefaultTableModel();
+            ProfileFormListener l = new ProfileFormListener(exe, model, selectAccount, selectedAccount);
 
-        model.addColumn("Name");
-        model.addColumn("Date of birth");
+            model.addColumn("Name");
+            model.addColumn("Date of birth");
 
-        for (int i = model.getRowCount(); i > 0; i--) {
-            model.removeRow(i - 1);
-        }
+            for (int i = model.getRowCount(); i > 0; i--) {
+                model.removeRow(i - 1);
+            }
 
-        for(Object o:exe.getProfiles(selectedAccount)){
-            Profile p = (Profile) o;
-            model.addRow(new Object[]{p.getProfileName(), p.getDateOfBirth()});
-        }
+            for (Object o : exe.getProfiles(selectedAccount)) {
+                Profile p = (Profile) o;
+                model.addRow(new Object[]{p.getProfileName(), p.getDateOfBirth()});
+            }
 
-        table.setModel(model);
-        button.addActionListener(l);
+            table.setModel(model);
+            button.addActionListener(l);
+        }catch (Exception ex){}
     }
 }

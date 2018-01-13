@@ -4,9 +4,9 @@ import ActionListeners.Watched.WatchedFormListener;
 import ActionListeners.Watched.WatchedListener;
 import ActionListeners.Watched.WatchedSelectAccountListener;
 import DatabaseConnections.SQLExecutor;
+import GUI.ComboBoxUpdater;
 import GUI.ComboModel;
 import UserData.Account;
-import UserData.Profile;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +22,8 @@ public class WatchedPanel extends JPanel {
         for(Account a:accounts){
             selectAccount.addItem(new ComboModel(a.getName(), a));
         }
+        ComboBoxUpdater.addAccountBox(selectAccount);
+
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);

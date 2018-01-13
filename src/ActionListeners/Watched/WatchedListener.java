@@ -35,7 +35,13 @@ public class WatchedListener implements ActionListener {
             return;
         }
         List<Account> accounts = exe.getAccounts();
-        Account acc = accounts.get(selectAccount.getSelectedIndex());
+
+        int selectedIndex = selectAccount.getSelectedIndex();
+        if(selectedIndex < 0){
+            selectedIndex += 1;
+        }
+        Account acc = accounts.get(selectedIndex);
+
         List<Profile> profiles = exe.getProfiles(acc);
         Profile prof = profiles.get(selectProfile.getSelectedIndex());
         List<Watched> watched = exe.getWatched(prof);

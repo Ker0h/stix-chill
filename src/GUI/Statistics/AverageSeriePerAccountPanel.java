@@ -2,6 +2,7 @@ package GUI.Statistics;
 
 import ActionListeners.Statistics.AverageSeriesPerAccountListener;
 import DatabaseConnections.SQLExecutor;
+import GUI.ComboBoxUpdater;
 import GUI.ComboModel;
 import UserData.Account;
 import Watchables.Series;
@@ -23,6 +24,7 @@ public class AverageSeriePerAccountPanel extends JPanel {
         for(Account a : exe.getAccounts()){
             ca.addItem(new ComboModel(a.getName(), a));
         }
+        ComboBoxUpdater.addAccountBox(ca);
 
         JComboBox cs = new JComboBox();
         for(Series s : exe.getSeries()){

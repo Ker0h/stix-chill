@@ -1,6 +1,7 @@
 package ActionListeners.Statistics;
 
 import DatabaseConnections.SQLExecutor;
+import GUI.ComboBoxUpdater;
 import UserData.Account;
 import UserData.Watched;
 import Watchables.Episode;
@@ -32,7 +33,13 @@ public class AverageSeriesPerAccountListener implements ActionListener {
         Series s = x.get(cs.getSelectedIndex());
         ArrayList<Episode> ep = (ArrayList<Episode>) sql.getEpisodes(s);
         ArrayList<Account> ac = (ArrayList<Account>) sql.getAccounts();
-        Account acc = ac.get(ca.getSelectedIndex());
+
+        int selectedIndex = ca.getSelectedIndex();
+        if(selectedIndex < 0){
+            selectedIndex += 1;
+        }
+        Account acc = ac.get(selectedIndex);
+
         ArrayList<Watched> wa = (ArrayList<Watched>) sql.getWatched(acc, s);
 
         //Make 3 new arraylists for the end result.
@@ -42,16 +49,17 @@ public class AverageSeriesPerAccountListener implements ActionListener {
 
         //loop through every Episode to get the people who watched the episode with the percentage they watched.
         // check in the seccond loop what episode is actually watched
-        for(Episode epi : ep){
+        for (Episode epi : ep) {
             double t = 0;
             double totalPer = 0;
-            for (Watched wat : wa){
-                if(epi.getProgrammeID() == wat.GetProgrammeID()){
-                    totalPer =+ wat.getPercentage();
+            for (Watched wat : wa) {
+                if (epi.getProgrammeID() == wat.GetProgrammeID()) {
+                    totalPer = +wat.getPercentage();
                     t++;
                     break;
                 }
             }
+
             double calculatedPer = totalPer / t;
             if (Double.isNaN(calculatedPer)){
                 calculatedPer = 0;
@@ -76,6 +84,5 @@ public class AverageSeriesPerAccountListener implements ActionListener {
 
         //update the table you already made with the new model
         t.setModel(model);
-
     }
 }
