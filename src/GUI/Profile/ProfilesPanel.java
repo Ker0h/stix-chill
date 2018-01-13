@@ -19,7 +19,7 @@ public class ProfilesPanel extends JPanel {
     private int selectedRow;
     private String profileName;
     private String dateOfBirth;
-    private ProfileFormListener l;
+    private ProfileFormListener formListener;
     private DeleteProfileListener deleteProfileListener;
 
     public ProfilesPanel(SQLExecutor exe){
@@ -40,7 +40,7 @@ public class ProfilesPanel extends JPanel {
         JButton edit = new JButton("Edit profile");
         JButton delete = new JButton("Delete profile");
 
-        l = new ProfileFormListener(exe, (DefaultTableModel) table.getModel(), selectAccount, profileName, dateOfBirth, accounts.get(selectAccount.getSelectedIndex()));
+        formListener = new ProfileFormListener(exe, (DefaultTableModel) table.getModel(), selectAccount, profileName, dateOfBirth, accounts.get(selectAccount.getSelectedIndex()));
         deleteProfileListener = new DeleteProfileListener(exe, selectAccount, profileName);
 
         //Updates the data in the form- and deletelistener depending on the selected account in the table
@@ -51,42 +51,34 @@ public class ProfilesPanel extends JPanel {
                 profileName = (String) table.getModel().getValueAt(selectedRow, 0);
                 dateOfBirth = (String) table.getModel().getValueAt(selectedRow, 1);
 
-                edit.removeActionListener(l);
+                edit.removeActionListener(formListener);
                 delete.removeActionListener(deleteProfileListener);
 
-                l.setProfileName(profileName);
+                formListener.setProfileName(profileName);
                 deleteProfileListener.setProfileName(profileName);
-                l.setDateOfBirth(dateOfBirth);
-                l.setAccount(accounts.get(selectAccount.getSelectedIndex()));
+                formListener.setDateOfBirth(dateOfBirth);
+                formListener.setAccount(accounts.get(selectAccount.getSelectedIndex()));
 
-                edit.addActionListener(l);
+                edit.addActionListener(formListener);
                 delete.addActionListener(deleteProfileListener);
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         };
         table.addMouseListener(tableListener);
 
         selectAccount.addActionListener(new ProfilesListener(selectAccount, table, exe, addProfileButton, accounts));
-        addProfileButton.addActionListener(l);
+        addProfileButton.addActionListener(formListener);
 
         JScrollPane scrollPane = new JScrollPane(table);
 

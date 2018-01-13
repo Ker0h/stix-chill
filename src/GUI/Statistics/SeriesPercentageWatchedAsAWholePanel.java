@@ -9,8 +9,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class SeriePercentageWatchedAsAWholePanel extends JPanel {
-    public SeriePercentageWatchedAsAWholePanel(SQLExecutor exe) {
+public class SeriesPercentageWatchedAsAWholePanel extends JPanel {
+    public SeriesPercentageWatchedAsAWholePanel(SQLExecutor exe) {
         super(new BorderLayout());
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable(model);
