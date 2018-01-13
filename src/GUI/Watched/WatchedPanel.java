@@ -49,7 +49,7 @@ public class WatchedPanel extends JPanel {
         JButton add = new JButton("Add a new Watched");
         JButton edit = new JButton("Edit watched");
         JButton delete = new JButton("Delete watched");
-        add.addActionListener(new AddWatchedFormListener(exe));
+        add.addActionListener(new AddWatchedFormListener(exe, selectAccount, selectProfile));
 
         editListener = new EditWatchedFormListener(exe, episodeName, percentage, profileName, selectAccount, selectProfile);
 

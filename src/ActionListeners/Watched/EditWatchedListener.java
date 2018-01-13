@@ -47,11 +47,10 @@ public class EditWatchedListener implements ActionListener {
                     if(epi.getTitle().equals(programme)){
                         exe.EditWatched(profileName, epi.getProgrammeID(), Integer.parseInt(percentage.getText()));
                         JOptionPane.showMessageDialog(frame,profileName + " has now watched " + programmeName + " for " + percentage.getText() + "%!");
-                        combo.setSelectedItem(combo.getSelectedItem());
                         int y = combo2.getSelectedIndex();
+                        combo.setSelectedItem(combo.getSelectedItem());
                         combo2.setSelectedIndex(y);
                         frame.dispose();
-
                     }
                 }
             }else{

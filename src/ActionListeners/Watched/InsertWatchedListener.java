@@ -6,7 +6,6 @@ import UserData.Watched;
 import Watchables.Programme;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,8 +18,10 @@ public class InsertWatchedListener implements ActionListener {
     private JTextField percentage;
     private ArrayList<Profile> profiles;
     private ArrayList programmes;
+    private JComboBox combo1;
+    private JComboBox combo2;
 
-    public InsertWatchedListener(SQLExecutor exe, JFrame frame, JComboBox profileCombo, JComboBox programmeCombo, JTextField percentage, ArrayList profiles, ArrayList programmes) {
+    public InsertWatchedListener(SQLExecutor exe, JFrame frame, JComboBox profileCombo, JComboBox programmeCombo, JTextField percentage, ArrayList profiles, ArrayList programmes, JComboBox combo1, JComboBox combo2) {
         this.exe = exe;
         this.frame = frame;
         this.profileCombo = profileCombo;
@@ -28,6 +29,8 @@ public class InsertWatchedListener implements ActionListener {
         this.percentage = percentage;
         this.profiles = profiles;
         this.programmes = programmes;
+        this.combo1 = combo1;
+        this.combo2 = combo2;
     }
 
     @Override
@@ -65,6 +68,9 @@ public class InsertWatchedListener implements ActionListener {
                 if(!exists){
                     exe.insertWatched(selectedProfileName, selectedProgrammeId, selectedPercentage);
                     JOptionPane.showMessageDialog(frame,selectedProfileName + " has seen " + selectedPercentage + "% of " + selectedProgrammeName);
+                    int y = combo2.getSelectedIndex();
+                    combo1.setSelectedItem(combo1.getSelectedItem());
+                    combo2.setSelectedIndex(y);
                     frame.dispose();
                 }
             }

@@ -16,9 +16,13 @@ import java.util.List;
 public class WatchedAddForm implements Runnable {
     private JFrame frame;
     private SQLExecutor exe;
+    private JComboBox combo1;
+    private JComboBox combo2;
 
-    public WatchedAddForm(SQLExecutor exe) {
+    public WatchedAddForm(SQLExecutor exe, JComboBox combo1, JComboBox combo2) {
         this.exe = exe;
+        this.combo1 = combo1;
+        this.combo2 = combo2;
     }
 
     @Override
@@ -74,7 +78,7 @@ public class WatchedAddForm implements Runnable {
 
         JPanel buttonPanel = new JPanel();
         JButton addWatched = new JButton("Add a Watched");
-        addWatched.addActionListener(new InsertWatchedListener(exe, frame, comboProfiles, comboProgrammes, percentageInput, profiles, allFilmAndEpisodes));
+        addWatched.addActionListener(new InsertWatchedListener(exe, frame, comboProfiles, comboProgrammes, percentageInput, profiles, allFilmAndEpisodes, combo1, combo2));
         buttonPanel.add(addWatched);
 
         panel.add(comboProfiles);
