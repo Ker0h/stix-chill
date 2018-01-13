@@ -51,7 +51,7 @@ public class WatchedPanel extends JPanel {
         JButton delete = new JButton("Delete watched");
         add.addActionListener(new AddWatchedFormListener(exe));
 
-        editListener = new EditWatchedFormListener(exe, episodeName, percentage, profileName);
+        editListener = new EditWatchedFormListener(exe, episodeName, percentage, profileName, selectAccount, selectProfile);
 
         MouseListener tableListener = new MouseListener() {
 
