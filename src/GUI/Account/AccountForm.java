@@ -75,6 +75,8 @@ public class AccountForm implements Runnable{
         cityLabel.setLabelFor(cityField);
 
         JButton submit = new JButton("Save account");
+
+        //Changes components within the form, depending on the button that invoked it.
         if(actionCommand.equals("Add new account")){
             frame.setTitle("Add new account");
             submit.addActionListener(new InsertAccountListener(exe, model, frame, subField, nameField, streetField, houseNumberField, postalField, cityField));

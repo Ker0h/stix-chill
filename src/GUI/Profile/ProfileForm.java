@@ -58,6 +58,7 @@ public class ProfileForm implements Runnable {
 
         JButton submit = new JButton("Save profile");
 
+        //Changes components within the form, depending on the button that invoked it.
         if(actionCommand.equals("Add new profile")){
             frame.setTitle("Add new profile");
             submit.addActionListener(new InsertProfileListener(exe, model, comboBox, frame, nameField, dateOfBirthField, account));

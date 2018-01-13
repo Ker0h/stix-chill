@@ -45,6 +45,7 @@ public class ProfileFormListener implements ActionListener {
         this.account = account;
     }
 
+    //Invokes a new ProfileForm, possibly with selected data
     @Override
     public void actionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(new ProfileForm(exe, model, comboBox, e.getActionCommand(), profileName, dateOfBirth, account));

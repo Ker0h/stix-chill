@@ -31,6 +31,7 @@ public class InsertAccountListener implements ActionListener {
         this.city = city;
     }
 
+    //Inserts new account, refreshes the DefaultTableModel and disposes of the FormPanel
     @Override
     public void actionPerformed(ActionEvent e) {
         exe.insertAccount(sub.getText(), name.getText(), street.getText(), houseNumber.getText(), postalCode.getText(), city.getText());

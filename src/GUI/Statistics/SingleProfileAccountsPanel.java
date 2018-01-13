@@ -1,5 +1,6 @@
 package GUI.Statistics;
 
+import GUI.SingleProfileTableUpdater;
 import UserData.Account;
 import DatabaseConnections.SQLExecutor;
 
@@ -11,6 +12,7 @@ public class SingleProfileAccountsPanel extends JPanel {
     public SingleProfileAccountsPanel(SQLExecutor exe){
         super(new BorderLayout());
         DefaultTableModel singleProfileModel = new DefaultTableModel();
+        SingleProfileTableUpdater.setSingleProfileModel(singleProfileModel);
         JTable singleProfileAccountTable = new JTable(singleProfileModel);
 
         singleProfileModel.addColumn("Subscriber number");

@@ -30,6 +30,11 @@ public class UpdateProfileListener implements ActionListener {
         this.account = account;
     }
 
+    /*
+     * If the given DateOfBirth matches the regex, updates the profile
+     * Else it shows a message to the user.
+     * Then the DefaultTableModel is refreshed, the FormPanel disposed and the earlier selected account reselected
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(dateField.getText().matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")){

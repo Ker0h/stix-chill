@@ -23,6 +23,7 @@ public class DeleteAccountListener implements ActionListener {
         this.sub = sub;
     }
 
+    //Deletes selected account and refreshes the DefaultTableModel
     @Override
     public void actionPerformed(ActionEvent e) {
         exe.deleteAccount(sub);
