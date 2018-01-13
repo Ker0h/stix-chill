@@ -43,6 +43,7 @@ public class ProfilesPanel extends JPanel {
         l = new ProfileFormListener(exe, (DefaultTableModel) table.getModel(), selectAccount, profileName, dateOfBirth, accounts.get(selectAccount.getSelectedIndex()));
         deleteProfileListener = new DeleteProfileListener(exe, selectAccount, profileName);
 
+        //Updates the data in the form- and deletelistener depending on the selected account in the table
         MouseListener tableListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {

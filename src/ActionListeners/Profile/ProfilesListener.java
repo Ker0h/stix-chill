@@ -25,6 +25,10 @@ public class ProfilesListener implements ActionListener {
         this.accounts = accounts;
     }
 
+    /*
+     * Gets the selected account and refreshes the DefaultTableModel accordingly
+     * Also updates the ActionListener for the addProfileButton to use the selected account
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int selectedIndex = selectAccount.getSelectedIndex();

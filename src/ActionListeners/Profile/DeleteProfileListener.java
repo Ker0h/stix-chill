@@ -20,6 +20,7 @@ public class DeleteProfileListener implements ActionListener {
         this.profileName = profileName;
     }
 
+    //Deletes selected profile and reselects selected account
     @Override
     public void actionPerformed(ActionEvent e) {
         exe.deleteProfile(profileName);

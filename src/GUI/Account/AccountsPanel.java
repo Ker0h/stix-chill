@@ -33,20 +33,20 @@ public class AccountsPanel extends JPanel {
         model.addColumn("Street");
         model.addColumn("House number");
 
-            for (int i = model.getRowCount(); i > 0; i--) {
-                model.removeRow(i - 1);
-            }
+        for (int i = model.getRowCount(); i > 0; i--) {
+            model.removeRow(i - 1);
+        }
 
-            for (Account a : exe.getAccounts()) {
-                model.addRow(new Object[]{
-                        a.getSubscriberNumber(),
-                        a.getName(),
-                        a.getCity(),
-                        a.getPostalCode(),
-                        a.getStreetName(),
-                        a.getHouseNumber()
-                });
-            }
+        for (Account a : exe.getAccounts()) {
+            model.addRow(new Object[]{
+                    a.getSubscriberNumber(),
+                    a.getName(),
+                    a.getCity(),
+                    a.getPostalCode(),
+                    a.getStreetName(),
+                    a.getHouseNumber()
+            });
+        }
 
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -59,16 +59,17 @@ public class AccountsPanel extends JPanel {
         l = new AccountFormListener(exe, model, sub, name, street, houseNumber, postalCode, city);
         deleteAccountListener = new DeleteAccountListener(exe, sub, model);
 
+        //Updates the data in the form- and deletelistener depending on the selected account in the table
         MouseListener tableListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               selectedRow = table.rowAtPoint(e.getPoint());
-               sub = (String) model.getValueAt(selectedRow , 0);
-               name = (String) model.getValueAt(selectedRow , 1);
-               street = (String) model.getValueAt(selectedRow, 4);
-               houseNumber = (String) model.getValueAt(selectedRow, 5);
-               postalCode = (String) model.getValueAt(selectedRow, 3);
-               city = (String) model.getValueAt(selectedRow, 2);
+                selectedRow = table.rowAtPoint(e.getPoint());
+                sub = (String) model.getValueAt(selectedRow , 0);
+                name = (String) model.getValueAt(selectedRow , 1);
+                street = (String) model.getValueAt(selectedRow, 4);
+                houseNumber = (String) model.getValueAt(selectedRow, 5);
+                postalCode = (String) model.getValueAt(selectedRow, 3);
+                city = (String) model.getValueAt(selectedRow, 2);
 
                 edit.removeActionListener(l);
                 delete.removeActionListener(deleteAccountListener);
