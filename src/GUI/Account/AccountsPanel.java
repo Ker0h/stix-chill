@@ -38,7 +38,13 @@ public class AccountsPanel extends JPanel {
             }
 
             for (Account a : exe.getAccounts()) {
-                model.addRow(new Object[]{a.getSubscriberNumber(), a.getName(), a.getCity(), a.getPostalCode(), a.getStreetName(), a.getHouseNumber()});
+                model.addRow(new Object[]{a.getSubscriberNumber(),
+                        a.getName(),
+                        a.getCity(),
+                        a.getPostalCode(),
+                        a.getStreetName(),
+                        a.getHouseNumber()
+                });
             }
 
         JTable table = new JTable(model);

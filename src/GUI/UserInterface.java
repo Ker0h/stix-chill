@@ -17,7 +17,7 @@ public class UserInterface implements Runnable {
     public void run() {
         frame = new JFrame(" Stix & Chill");
 
-        frame.setPreferredSize(new Dimension(800, 600));
+        frame.setPreferredSize(new Dimension(1000, 600));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         createComponents(frame.getContentPane());

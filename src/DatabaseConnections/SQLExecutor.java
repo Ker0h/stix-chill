@@ -140,6 +140,39 @@ public class SQLExecutor {
         }
     }
 
+    public List<Account> getAccountsWithSingleProfile() {
+        List<Account> accounts = new ArrayList<>();
+        DBConnector dbConnector = new DBConnector();
+        try {
+            resultSet = dbConnector.runSQL("SELECT Account.SubscriberNumber, Name, StreetName, HouseNumber, PostalCode, City \n" +
+                                            "FROM Account \n" +
+                                            "JOIN Profile ON Profile.SubscriberNumber = Account.SubscriberNumber\n" +
+                                            "GROUP BY Account.SubscriberNumber, Name, StreetName, HouseNumber, PostalCode, City\n" +
+                                             "HAVING COUNT(ProfileName) = 1;");
+
+            while (resultSet.next()) {
+                String subNo = resultSet.getString("SubscriberNumber");
+                String name = resultSet.getString("Name");
+                String streetName = resultSet.getString("StreetName");
+                String postalCode = resultSet.getString("PostalCode");
+                String houseNumber = resultSet.getString("HouseNumber");
+                String city = resultSet.getString("City");
+
+                Account acc = new Account(subNo, name, streetName, houseNumber, postalCode, city);
+                accounts.add(acc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try {
+                resultSet.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return accounts;
+    }
+
     public void updateProfile(String profileName, JTextField nameField, JTextField dateField){
         DBConnector dbConnector = new DBConnector();
         try {

@@ -12,13 +12,22 @@ public class SingleProfileAccountsPanel extends JPanel {
         super(new BorderLayout());
         DefaultTableModel singleProfileModel = new DefaultTableModel();
         JTable singleProfileAccountTable = new JTable(singleProfileModel);
-        singleProfileModel.addColumn("Accounts with a single profile");
 
-        for(Account a:exe.getAccounts()){
-            System.out.println(a.getName() + ": " + a.getProfiles().size());
-            if(a.getProfiles().size() == 1) {
-                singleProfileModel.addRow(new Object[]{a.getSubscriberNumber()});
-            }
+        singleProfileModel.addColumn("Subscriber Number");
+        singleProfileModel.addColumn("Name");
+        singleProfileModel.addColumn("City");
+        singleProfileModel.addColumn("Postal/Zip code");
+        singleProfileModel.addColumn("Street");
+        singleProfileModel.addColumn("House number");
+
+        for(Account a:exe.getAccountsWithSingleProfile()){
+            singleProfileModel.addRow(new Object[]{a.getSubscriberNumber(),
+                    a.getName(),
+                    a.getCity(),
+                    a.getPostalCode(),
+                    a.getStreetName(),
+                    a.getHouseNumber()
+            });
         }
 
         JScrollPane scrollPane = new JScrollPane(singleProfileAccountTable);
