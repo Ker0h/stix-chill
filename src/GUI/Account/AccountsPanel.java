@@ -26,7 +26,7 @@ public class AccountsPanel extends JPanel {
         super(new BorderLayout());
 
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Subscriber Number");
+        model.addColumn("Subscriber number");
         model.addColumn("Name");
         model.addColumn("City");
         model.addColumn("Postal/Zip code");

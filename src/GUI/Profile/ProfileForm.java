@@ -60,7 +60,7 @@ public class ProfileForm implements Runnable {
 
         if(actionCommand.equals("Add new profile")){
             frame.setTitle("Add new profile");
-            submit.addActionListener(new InsertProfileListener(exe, model, frame, nameField, dateOfBirthField, account));
+            submit.addActionListener(new InsertProfileListener(exe, model, comboBox, frame, nameField, dateOfBirthField, account));
         }else if(actionCommand.equals("Edit profile")){
             frame.setTitle("Edit profile");
             nameField.setText(profileName);

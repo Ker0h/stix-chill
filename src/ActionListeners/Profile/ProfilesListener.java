@@ -27,25 +27,28 @@ public class ProfilesListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Account selectedAccount = accounts.get(selectAccount.getSelectedIndex());
-            DefaultTableModel model = new DefaultTableModel();
-            ProfileFormListener l = new ProfileFormListener(exe, model, selectAccount, selectedAccount);
+        int selectedIndex = selectAccount.getSelectedIndex();
+        if(selectedIndex < 0){
+            selectedIndex += 1;
+        }
+        Account selectedAccount = accounts.get(selectedIndex);
 
-            model.addColumn("Name");
-            model.addColumn("Date of birth");
+        DefaultTableModel model = new DefaultTableModel();
 
-            for (int i = model.getRowCount(); i > 0; i--) {
-                model.removeRow(i - 1);
-            }
+        model.addColumn("Name");
+        model.addColumn("Date of birth");
 
-            for (Object o : exe.getProfiles(selectedAccount)) {
-                Profile p = (Profile) o;
-                model.addRow(new Object[]{p.getProfileName(), p.getDateOfBirth()});
-            }
+        for (int i = model.getRowCount(); i > 0; i--) {
+            model.removeRow(i - 1);
+        }
 
-            table.setModel(model);
-            button.addActionListener(l);
-        }catch (Exception ex){}
+        for (Object o : exe.getProfiles(selectedAccount)) {
+            Profile p = (Profile) o;
+            model.addRow(new Object[]{p.getProfileName(), p.getDateOfBirth()});
+        }
+
+        table.setModel(model);
+        ProfileFormListener pfl = (ProfileFormListener) button.getActionListeners()[0];
+        pfl.setAccount(selectedAccount);
     }
 }

@@ -23,7 +23,7 @@ public class DeleteProfileListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         exe.deleteProfile(profileName);
-        comboBox.setSelectedIndex(0);
+        comboBox.setSelectedIndex(comboBox.getSelectedIndex());
 
     }
 }

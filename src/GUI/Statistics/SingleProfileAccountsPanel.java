@@ -13,7 +13,7 @@ public class SingleProfileAccountsPanel extends JPanel {
         DefaultTableModel singleProfileModel = new DefaultTableModel();
         JTable singleProfileAccountTable = new JTable(singleProfileModel);
 
-        singleProfileModel.addColumn("Subscriber Number");
+        singleProfileModel.addColumn("Subscriber number");
         singleProfileModel.addColumn("Name");
         singleProfileModel.addColumn("City");
         singleProfileModel.addColumn("Postal/Zip code");

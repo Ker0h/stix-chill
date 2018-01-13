@@ -12,14 +12,16 @@ import java.awt.event.ActionListener;
 public class InsertProfileListener implements ActionListener {
     private SQLExecutor exe;
     private DefaultTableModel model;
+    private JComboBox comboBox;
     private JFrame frame;
     private JTextField profileName;
     private JTextField dateOfBirth;
     private Account account;
 
-    public InsertProfileListener(SQLExecutor exe, DefaultTableModel model, JFrame frame, JTextField profileName, JTextField dateOfBirth, Account account) {
+    public InsertProfileListener(SQLExecutor exe, DefaultTableModel model, JComboBox comboBox, JFrame frame, JTextField profileName, JTextField dateOfBirth, Account account) {
         this.exe = exe;
         this.model = model;
+        this.comboBox = comboBox;
         this.frame = frame;
         this.profileName = profileName;
         this.dateOfBirth = dateOfBirth;
@@ -30,7 +32,7 @@ public class InsertProfileListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(dateOfBirth.getText().matches("([0-9]{4})-([0-9]{2})-([0-9]{2})")){
             try {
-                exe.insertProfile(profileName.getText(), dateOfBirth.getText(), account.getSubscriberNumber());
+                exe.insertProfile(profileName, dateOfBirth, account.getSubscriberNumber());
             }catch(Exception ex){
                 JOptionPane.showMessageDialog(frame, ex.getMessage());
             }
@@ -44,6 +46,7 @@ public class InsertProfileListener implements ActionListener {
             }
 
             frame.dispose();
+            comboBox.setSelectedIndex(comboBox.getSelectedIndex());
         }else{
             JOptionPane.showMessageDialog(frame, "Date of birth is supposed to be YYY-MM-DD format");
         }

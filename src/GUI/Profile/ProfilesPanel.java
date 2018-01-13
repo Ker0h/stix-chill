@@ -85,6 +85,7 @@ public class ProfilesPanel extends JPanel {
         table.addMouseListener(tableListener);
 
         selectAccount.addActionListener(new ProfilesListener(selectAccount, table, exe, addProfileButton, accounts));
+        addProfileButton.addActionListener(l);
 
         JScrollPane scrollPane = new JScrollPane(table);
 

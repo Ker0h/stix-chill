@@ -128,18 +128,6 @@ public class SQLExecutor {
         return accounts;
     }
 
-    public void insertProfile(String profileName, String dateOfBirth, String subscriberNumber){
-        DBConnector dbConnector = new DBConnector();
-        try {
-            String SQL = "INSERT INTO Profile(SubscriberNumber, ProfileName, DateOfBirth) VALUES(" + subscriberNumber + ", '" + profileName + "', '" + dateOfBirth + "');";
-            dbConnector.crudSQL(SQL);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
-        }
-    }
-
     public List<Account> getAccountsWithSingleProfile() {
         List<Account> accounts = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
@@ -173,6 +161,18 @@ public class SQLExecutor {
         return accounts;
     }
 
+    public void insertProfile(JTextField profileName, JTextField dateOfBirth, String subscriberNumber){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "INSERT INTO Profile(SubscriberNumber, ProfileName, DateOfBirth) VALUES(" + subscriberNumber + ", '" + profileName.getText() + "', '" + dateOfBirth.getText() + "');";
+            dbConnector.crudSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
     public void updateProfile(String profileName, JTextField nameField, JTextField dateField){
         DBConnector dbConnector = new DBConnector();
         try {
@@ -201,7 +201,10 @@ public class SQLExecutor {
         List<Profile> profiles = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
         try {
-            String SQL = "SELECT * FROM Profile WHERE SubscriberNumber = " + account.getSubscriberNumber();
+            String SQL = "SELECT ProfileName, DateOfBirth \n" +
+                        "FROM Profile \n" +
+                        "JOIN Account ON Profile.SubscriberNumber = Account.SubscriberNumber \n" +
+                        "WHERE Account.SubscriberNumber = " + account.getSubscriberNumber();
             resultSet = dbConnector.runSQL(SQL);
 
             while (resultSet.next()) {

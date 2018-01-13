@@ -48,7 +48,7 @@ public class UpdateProfileListener implements ActionListener {
             }
 
             frame.dispose();
-            comboBox.setSelectedIndex(0);
+            comboBox.setSelectedIndex(comboBox.getSelectedIndex());
         }else{
             JOptionPane.showMessageDialog(frame, "Date of birth is supposed to be YYY-MM-DD format");
         }
