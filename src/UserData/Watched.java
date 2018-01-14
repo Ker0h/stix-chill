@@ -1,7 +1,5 @@
 package UserData;
 
-import Watchables.Programme;
-
 public class Watched {
     private int percentage;
     private String profileName;
