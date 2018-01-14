@@ -1,9 +1,6 @@
 package GUI.Watched;
 
-import ActionListeners.Watched.AddWatchedFormListener;
-import ActionListeners.Watched.EditWatchedFormListener;
-import ActionListeners.Watched.WatchedListener;
-import ActionListeners.Watched.WatchedSelectAccountListener;
+import ActionListeners.Watched.*;
 import DatabaseConnections.SQLExecutor;
 import GUI.ComboBoxUpdater;
 import GUI.ComboModel;
@@ -21,6 +18,7 @@ public class WatchedPanel extends JPanel {
     private String profileName;
     private String episodeName;
     private EditWatchedFormListener editListener;
+    private DeleteWatchedListener deleteListener;
 
     public WatchedPanel(SQLExecutor exe){
         super(new BorderLayout());
@@ -52,7 +50,7 @@ public class WatchedPanel extends JPanel {
         add.addActionListener(new AddWatchedFormListener(exe, selectAccount, selectProfile));
 
         editListener = new EditWatchedFormListener(exe, episodeName, percentage, profileName, selectAccount, selectProfile);
-
+        deleteListener = new DeleteWatchedListener(this,exe, episodeName, profileName, percentage, selectAccount, selectProfile);
         MouseListener tableListener = new MouseListener() {
 
             @Override
@@ -64,12 +62,17 @@ public class WatchedPanel extends JPanel {
                 profileName = profile.toString();
 
                 edit.removeActionListener(editListener);
+                delete.removeActionListener(deleteListener);
 
                 editListener.setEpisodeName(episodeName);
                 editListener.setPercentage(percentage);
                 editListener.setProfileName(profileName);
+                deleteListener.setEpisodeName(episodeName);
+                deleteListener.setPercentage(percentage);
+                deleteListener.setProfileName(profileName);
 
                 edit.addActionListener(editListener);
+                delete.addActionListener(deleteListener);
             }
 
             @Override

@@ -86,6 +86,18 @@ public class SQLExecutor {
         }
     }
 
+    public void deleteWatched(String profileName, int programmeId){
+        DBConnector dbConnector = new DBConnector();
+        try {
+            String SQL = "DELETE FROM Watched WHERE ProfileName = '" + profileName + "' AND ProgrameID = " + programmeId;
+            dbConnector.crudSQL(SQL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (resultSet != null) try { resultSet.close(); } catch(Exception e) {e.printStackTrace();}
+        }
+    }
+
     public List<Account> getAccounts(){
         List<Account> accounts = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
@@ -283,8 +295,6 @@ public class SQLExecutor {
                 ser.addEpisode(ep);
                 episodes.add(ep);
             }
-            //System.out.println(ser);
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
