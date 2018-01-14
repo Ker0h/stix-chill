@@ -42,6 +42,7 @@ public class EditWatchedFormListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // creates a new form
         SwingUtilities.invokeLater(new WatchedEditForm(exe, episodeName, percentage, profileName, combo, combo2));
     }
 }

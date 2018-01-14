@@ -38,6 +38,7 @@ public class WatchedAddForm implements Runnable {
         frame.setVisible(true);
     }
     public void createComponents(Container container) {
+        // gets all the data that we need
         List<Account> accounts = exe.getAccounts();
         ArrayList<Profile> profiles = new ArrayList<>();
         ArrayList<String> comboProfileNames = new ArrayList<>();
@@ -65,7 +66,7 @@ public class WatchedAddForm implements Runnable {
             allFilmAndEpisodes.add(e);
         }
 
-
+        // creats a panel with comboboxes en a textfield
         JPanel panel = new JPanel();
         JComboBox comboProfiles = new JComboBox();
         comboProfiles.setModel(new DefaultComboBoxModel(comboProfileNames.toArray()));
@@ -75,19 +76,19 @@ public class WatchedAddForm implements Runnable {
         JTextField percentageInput = new JTextField();
         percentageInput.setPreferredSize(new Dimension(50, 24));
         percentageLabel.setLabelFor(percentageInput);
-
+        // creates a button panel
         JPanel buttonPanel = new JPanel();
         JButton addWatched = new JButton("Add a Watched");
         addWatched.addActionListener(new InsertWatchedListener(exe, frame, comboProfiles, comboProgrammes, percentageInput, profiles, allFilmAndEpisodes, combo1, combo2));
         buttonPanel.add(addWatched);
-
+        //add all the components to a panel
         panel.add(comboProfiles);
         panel.add(comboProgrammes);
         panel.add(percentageLabel);
         panel.add(percentageInput);
-
+        // add the pannel to a scrollpane
         JScrollPane scrollPane = new JScrollPane(panel);
-
+        // add the panels to the container
         container.add(scrollPane);
         container.add(buttonPanel,BorderLayout.SOUTH);
     }

@@ -21,6 +21,7 @@ public class AddWatchedFormListener implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //creates a new from
         SwingUtilities.invokeLater(new WatchedAddForm(exe, combo1, combo2));
     }
 }

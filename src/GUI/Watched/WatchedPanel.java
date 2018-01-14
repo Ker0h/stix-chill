@@ -35,10 +35,10 @@ public class WatchedPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
 
         JComboBox selectProfile = new JComboBox();
-
+        // adds the action listeners
         selectAccount.addActionListener(new WatchedSelectAccountListener(selectAccount, selectProfile, accounts, exe));
         selectProfile.addActionListener(new WatchedListener(selectProfile, table, exe, selectAccount));
-
+        // makes the panels for the comboboxes
         JPanel comboBoxPanel = new JPanel(new BorderLayout());
         comboBoxPanel.add(selectAccount, BorderLayout.WEST);
         comboBoxPanel.add(selectProfile, BorderLayout.EAST);
@@ -48,11 +48,11 @@ public class WatchedPanel extends JPanel {
         JButton edit = new JButton("Edit watched");
         JButton delete = new JButton("Delete watched");
         add.addActionListener(new AddWatchedFormListener(exe, selectAccount, selectProfile));
-
+        // initialize the edit and delete listener
         editListener = new EditWatchedFormListener(exe, episodeName, percentage, profileName, selectAccount, selectProfile);
         deleteListener = new DeleteWatchedListener(this,exe, episodeName, profileName, percentage, selectAccount, selectProfile);
         MouseListener tableListener = new MouseListener() {
-
+            // this listener gets the data after someone clicked the table
             @Override
             public void mouseClicked(MouseEvent e) {
                 int selectedRow = table.rowAtPoint(e.getPoint());
@@ -95,13 +95,13 @@ public class WatchedPanel extends JPanel {
 
             }
         };
-
+        // adds the mouselistener to the table
         table.addMouseListener(tableListener);
-
+        // adds all the buttons to the panel
         buttonPanel.add(add);
         buttonPanel.add(edit);
         buttonPanel.add(delete);
-
+        // adds all the components to the panel
         this.add(comboBoxPanel, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
         this.add(buttonPanel, BorderLayout.SOUTH);

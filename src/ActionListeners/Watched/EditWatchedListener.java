@@ -34,6 +34,7 @@ public class EditWatchedListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //checks if input is correct then update
         if(percentage.getText().matches("^[1-9][0-9]?$|^100$")){
             if(programmeName.contains(": ")){
                 int x = programmeName.indexOf(": ");

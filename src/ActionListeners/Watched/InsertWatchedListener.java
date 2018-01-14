@@ -35,14 +35,17 @@ public class InsertWatchedListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // makes some new variables
         String selectedProfileName = profileCombo.getSelectedItem().toString();
         String selectedProgrammeName = programmeCombo.getSelectedItem().toString();
         Profile selectedProfile = null;
+        // gets the right profilename
         for(Profile pro : profiles){
             if(pro.getProfileName().equals(selectedProfileName)){
                 selectedProfile = pro;
             }
         }
+        // gets the right programmeID
         int selectedProgrammeId = 0;
         for (Object p : programmes){
             Programme pr = (Programme) p;
@@ -52,6 +55,7 @@ public class InsertWatchedListener implements ActionListener {
                 selectedProgrammeId = pr.getProgrammeID();
             }
         }
+        //checks the input and insert if correct
         if(percentage.getText().matches("^[1-9][0-9]?$|^100$")){
             int selectedPercentage = Integer.parseInt(percentage.getText());
             if(selectedPercentage <= 100 && selectedPercentage > 0){

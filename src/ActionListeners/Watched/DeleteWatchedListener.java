@@ -44,6 +44,7 @@ public class DeleteWatchedListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // gets data then delete
         if(profileName != null && episodeName != null) {
             if (episodeName.contains(": ")) {
                 int x = episodeName.indexOf(": ");

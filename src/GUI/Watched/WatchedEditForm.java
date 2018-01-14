@@ -26,6 +26,7 @@ public class WatchedEditForm implements Runnable {
 
     @Override
     public void run() {
+        // creates frame
         frame = new JFrame("Edit watched");
 
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
