@@ -21,9 +21,10 @@ public class FilmsByRatingPanel extends JPanel {
         model.addColumn("Film");
         pg.addActionListener(new FilmsByRatingListener(pg, model, exe));
         JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
 
         this.add(pg, BorderLayout.NORTH);
-        this.add(table, BorderLayout.CENTER);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
 }

@@ -21,9 +21,10 @@ public class FilmsByRatingListener implements ActionListener {
         this.sql = sql;
     }
 
+    //Gets the longest film for the selected age and refreshes the table
     @Override
     public void actionPerformed(ActionEvent e) {
-        List<Film> film = sql.getLongestFilmForMinors(pg.getSelectedItem());
+        List<Film> film = sql.getLongestFilmByRating(pg.getSelectedItem());
         if(model.getRowCount() > 0) {
             model.removeRow(model.getRowCount() - 1);
         }

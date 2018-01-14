@@ -329,12 +329,12 @@ public class SQLExecutor {
         return films;
     }
 
-    public List<Film> getLongestFilmForMinors(Object age){
+    public List<Film> getLongestFilmByRating(Object age){
         List<Film> films = new ArrayList<>();
         DBConnector dbConnector = new DBConnector();
 
         try {
-            resultSet = dbConnector.runSQL("SELECT TOP 1 * FROM Film f JOIN Programe p on p.ProgrameID = f.ProgrameID WHERE PG <= " + "'" + age.toString() + "'" + "ORDER BY Duration DESC;");
+            resultSet = dbConnector.runSQL("SELECT TOP 1 * FROM Film f JOIN Programe p on p.ProgrameID = f.ProgrameID WHERE PG <= " + age.toString() + " ORDER BY Duration DESC;");
 
             while (resultSet.next()) {
                 int programmeID = resultSet.getInt("ProgrameID");

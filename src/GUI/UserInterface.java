@@ -32,6 +32,7 @@ public class UserInterface implements Runnable {
         container.add(new FooterPanel(), BorderLayout.SOUTH);
     }
 
+    //Creates a JTabbedPane used to toggle between the different panels
     private JTabbedPane createMenuPane(){
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.LEFT);
 
@@ -49,6 +50,7 @@ public class UserInterface implements Runnable {
         return tabbedPane;
     }
 
+    //Creates a JTabbedPane used to toggle between the different entities within the system domain
     private JTabbedPane createDataPane(){
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.TOP);
 
