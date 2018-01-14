@@ -1,15 +1,15 @@
 package GUI.Statistics;
 
 import DatabaseConnections.SQLExecutor;
-import ActionListeners.Statistics.FilmsForMinorsListener;
+import ActionListeners.Statistics.FilmsByRatingListener;
 import GUI.ComboModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class FilmsForMinorsPanel extends JPanel {
-    public FilmsForMinorsPanel(SQLExecutor exe){
+public class FilmsByRatingPanel extends JPanel {
+    public FilmsByRatingPanel(SQLExecutor exe){
         super(new BorderLayout());
         JComboBox pg = new JComboBox();
         pg.addItem(new ComboModel("6", 6));
@@ -19,7 +19,7 @@ public class FilmsForMinorsPanel extends JPanel {
 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Film");
-        pg.addActionListener(new FilmsForMinorsListener(pg, model, exe));
+        pg.addActionListener(new FilmsByRatingListener(pg, model, exe));
         JTable table = new JTable(model);
 
         this.add(pg, BorderLayout.NORTH);

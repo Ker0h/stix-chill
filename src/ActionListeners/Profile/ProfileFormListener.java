@@ -17,13 +17,6 @@ public class ProfileFormListener implements ActionListener {
     private String dateOfBirth;
     private Account account;
 
-    public ProfileFormListener(SQLExecutor exe, DefaultTableModel model, JComboBox comboBox, Account account){
-        this.exe = exe;
-        this.model = model;
-        this.comboBox = comboBox;
-        this.account = account;
-    }
-
     public ProfileFormListener(SQLExecutor exe, DefaultTableModel model, JComboBox comboBox, String profileName, String dateOfBirth, Account account) {
         this.exe = exe;
         this.model = model;

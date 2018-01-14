@@ -11,8 +11,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-public class AverageSeriePerAccountPanel extends JPanel {
-    public AverageSeriePerAccountPanel(SQLExecutor exe){
+public class AverageSeriesPerAccountPanel extends JPanel {
+    public AverageSeriesPerAccountPanel(SQLExecutor exe){
         super(new BorderLayout());
         GridLayout grid = new GridLayout(0,2);
         DefaultTableModel model = new DefaultTableModel();

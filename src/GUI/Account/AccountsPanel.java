@@ -19,7 +19,7 @@ public class AccountsPanel extends JPanel {
     private String houseNumber;
     private String postalCode;
     private String city;
-    private AccountFormListener l;
+    private AccountFormListener formListener;
     private DeleteAccountListener deleteAccountListener;
 
     public AccountsPanel(SQLExecutor exe){
@@ -56,10 +56,10 @@ public class AccountsPanel extends JPanel {
         JButton edit = new JButton("Update account");
         JButton delete = new JButton("Delete account");
 
-        l = new AccountFormListener(exe, model, sub, name, street, houseNumber, postalCode, city);
+        formListener = new AccountFormListener(exe, model, sub, name, street, houseNumber, postalCode, city);
         deleteAccountListener = new DeleteAccountListener(exe, sub, model);
 
-        //Updates the data in the form- and deletelistener depending on the selected account in the table
+        //Updates the data in the form- and delete listener depending on the selected account in the table
         MouseListener tableListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -71,40 +71,32 @@ public class AccountsPanel extends JPanel {
                 postalCode = (String) model.getValueAt(selectedRow, 3);
                 city = (String) model.getValueAt(selectedRow, 2);
 
-                edit.removeActionListener(l);
+                edit.removeActionListener(formListener);
                 delete.removeActionListener(deleteAccountListener);
 
-                l.setSub(sub);
+                formListener.setSub(sub);
                 deleteAccountListener.setSub(sub);
-                l.setName(name);
-                l.setStreet(street);
-                l.setHouseNumber(houseNumber);
-                l.setPostalCode(postalCode);
-                l.setCity(city);
+                formListener.setName(name);
+                formListener.setStreet(street);
+                formListener.setHouseNumber(houseNumber);
+                formListener.setPostalCode(postalCode);
+                formListener.setCity(city);
 
-                edit.addActionListener(l);
+                edit.addActionListener(formListener);
                 delete.addActionListener(deleteAccountListener);
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
+            public void mousePressed(MouseEvent e) {}
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
+            public void mouseReleased(MouseEvent e) {}
 
             @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
+            public void mouseEntered(MouseEvent e) {}
 
             @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
+            public void mouseExited(MouseEvent e) {}
         };
         table.addMouseListener(tableListener);
 

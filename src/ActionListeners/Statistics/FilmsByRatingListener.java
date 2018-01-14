@@ -9,13 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class FilmsForMinorsListener implements ActionListener {
+public class FilmsByRatingListener implements ActionListener {
     private JComboBox pg;
     private DefaultTableModel model;
     private SQLExecutor sql;
 
 
-    public FilmsForMinorsListener(JComboBox pg, DefaultTableModel model, SQLExecutor sql){
+    public FilmsByRatingListener(JComboBox pg, DefaultTableModel model, SQLExecutor sql){
         this.pg = pg;
         this.model = model;
         this.sql = sql;
