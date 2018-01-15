@@ -10,17 +10,25 @@ public class Profile {
     private List watched;
 
     public Profile(String profileName, String dateOfBirth, Account account) {
-        this.profileName = profileName;
-        this.dateOfBirth = dateOfBirth;
-        this.account = account;
-        this.watched = new ArrayList<Watched>();
+        if(dateOfBirth.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
+            this.profileName = profileName;
+            this.dateOfBirth = dateOfBirth;
+            this.account = account;
+            this.watched = new ArrayList<Watched>();
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 
     public Profile(String profileName, String dateOfBirth, Account account, List watched) {
-        this.profileName = profileName;
-        this.dateOfBirth = dateOfBirth;
-        this.account = account;
-        this.watched = watched;
+        if(dateOfBirth.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
+            this.profileName = profileName;
+            this.dateOfBirth = dateOfBirth;
+            this.account = account;
+            this.watched = watched;
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 
     public String getProfileName() {
@@ -36,7 +44,11 @@ public class Profile {
     }
 
     public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+        if(dateOfBirth.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}")) {
+            this.dateOfBirth = dateOfBirth;
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 
     public Account getAccount() {

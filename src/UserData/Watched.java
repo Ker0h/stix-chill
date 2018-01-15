@@ -6,9 +6,9 @@ public class Watched {
     private int  programmeID;
 
     public Watched(int percentage, String profileName, int programmeID) {
-        this.percentage = percentage;
-        this.profileName = profileName;
-        this.programmeID = programmeID;
+                this.percentage = percentage;
+                this.profileName = profileName;
+                this.programmeID = programmeID;
     }
 
     public Watched(String profileName, int programmeID) {
@@ -22,7 +22,7 @@ public class Watched {
     }
 
     public void setPercentage(int percentage) {
-        this.percentage = percentage;
+            this.percentage = percentage;
     }
 
     public String getprofileName() {
@@ -59,5 +59,13 @@ public class Watched {
                 ", profileName='" + profileName + '\'' +
                 ", programmeID=" + programmeID +
                 '}';
+    }
+
+   public static boolean checkPercentage(String percentage) {
+        if (percentage.matches("^[1-9][0-9]?%$|^100%$")) {
+            return true;
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }
