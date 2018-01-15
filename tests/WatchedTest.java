@@ -22,6 +22,6 @@ public class WatchedTest {
     @Test(expected = IllegalArgumentException.class)
     public void testWatchedCheckPercentageWithIncorrectFormat(){
         //Act
-        boolean returnValue = Watched.checkPercentage("50");
+        boolean returnValue = Watched.checkPercentage("500");
     }
 }
